@@ -122,6 +122,10 @@ type_str(const NetplanNetDefinition* def)
             return "bond";
         case NETPLAN_DEF_TYPE_VLAN:
             return "vlan";
+        case NETPLAN_DEF_TYPE_VXLAN:
+            return "vxlan";
+        case NETPLAN_DEF_TYPE_VRF:
+            return "vrf";
         case NETPLAN_DEF_TYPE_TUNNEL:
             if (def->tunnel.mode == NETPLAN_TUNNEL_MODE_WIREGUARD)
                 return "wireguard";

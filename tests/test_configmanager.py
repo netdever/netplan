@@ -96,6 +96,12 @@ class TestConfigManager(unittest.TestCase):
     vlan2:
       id: 2
       link: eth99
+  vxlans:
+    vxlan2:
+      vni: 2
+  vrfs:
+    vrf2:
+      table: 2
   bridges:
     br3:
       interfaces: [ ethbr1 ]

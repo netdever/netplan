@@ -420,6 +420,14 @@ write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const ch
             g_string_append_printf(s, "Kind=vlan\n\n[VLAN]\nId=%u\n", def->vlan_id);
             break;
 
+        case NETPLAN_DEF_TYPE_VXLAN:
+            g_string_append_printf(s, "Kind=vxlan\n\n[VXLAN]\nVNI=%u\n", def->vxlan_vni);
+            break;
+
+        case NETPLAN_DEF_TYPE_VRF:
+            g_string_append_printf(s, "Kind=vrf\n\n[VRF]\nTable=%u\n", def->vrf_table);
+            break;
+
         case NETPLAN_DEF_TYPE_TUNNEL:
             switch(def->tunnel.mode) {
                 case NETPLAN_TUNNEL_MODE_GRE:

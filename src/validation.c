@@ -327,6 +327,18 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
             return yaml_error(npp, node, error, "%s: invalid id '%u' (allowed values are 0 to 4094)", nd->id, nd->vlan_id);
     }
 
+    if (nd->type == NETPLAN_DEF_TYPE_VXLAN) {
+        if (nd->vxlan_vni == G_MAXUINT)
+            return yaml_error(npp, node, error, "%s: missing 'vni' property", nd->vni);
+        if (nd->vxlan_vni > 16777216)
+            return yaml_error(npp, node, error, "%s: invalid vni '%u' (allowed values are 0 to 16777216)", nd->vni, nd->vxlan_vni);
+    }
+
+    if (nd->type == NETPLAN_DEF_TYPE_VRF) {
+        if (nd->vrf_table == G_MAXUINT)
+            return yaml_error(npp, node, error, "%s: missing 'table' property", nd->table);
+    }
+
     if (nd->type == NETPLAN_DEF_TYPE_TUNNEL) {
         valid = validate_tunnel_grammar(npp, nd, node, error);
         if (!valid)

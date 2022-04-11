@@ -2409,6 +2409,20 @@ static const mapping_entry_handler vlan_def_handlers[] = {
     {NULL}
 };
 
+static const mapping_entry_handler vxlan_def_handlers[] = {
+    COMMON_LINK_HANDLERS,
+    COMMON_BACKEND_HANDLERS,
+    {"vni", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_vni)},
+    {NULL}
+};
+
+static const mapping_entry_handler vrf_def_handlers[] = {
+    COMMON_LINK_HANDLERS,
+    COMMON_BACKEND_HANDLERS,
+    {"table", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vrf_table)},
+    {NULL}
+};
+
 static const mapping_entry_handler modem_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
@@ -2592,6 +2606,8 @@ handle_network_type(NetplanParser* npp, yaml_node_t* node, const void* data, GEr
             case NETPLAN_DEF_TYPE_MODEM: handlers = modem_def_handlers; break;
             case NETPLAN_DEF_TYPE_TUNNEL: handlers = tunnel_def_handlers; break;
             case NETPLAN_DEF_TYPE_VLAN: handlers = vlan_def_handlers; break;
+            case NETPLAN_DEF_TYPE_VXLAN: handlers = vxlan_def_handlers; break;
+            case NETPLAN_DEF_TYPE_VRF: handlers = vrf_def_handlers; break;
             case NETPLAN_DEF_TYPE_WIFI: handlers = wifi_def_handlers; break;
             case NETPLAN_DEF_TYPE_NM:
                 g_warning("netplan: %s: handling NetworkManager passthrough device, settings are not fully supported.", npp->current.netdef->id);
@@ -2651,6 +2667,8 @@ static const mapping_entry_handler network_handlers[] = {
     {"tunnels", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_TUNNEL)},
     {"version", YAML_SCALAR_NODE, {.generic=handle_network_version}},
     {"vlans", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_VLAN)},
+    {"vxlans", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_VXLAN)},
+    {"vrfs", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_VRF)},
     {"wifis", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_WIFI)},
     {"modems", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_MODEM)},
     {"nm-devices", YAML_MAPPING_NODE, {.map={.custom=handle_network_type}}, GUINT_TO_POINTER(NETPLAN_DEF_TYPE_NM)},
