@@ -175,6 +175,8 @@ struct netplan_net_definition {
     NetplanDefType type;
     NetplanBackend backend;
     char* id;
+    char* vni;
+    char* table;
     /* only necessary for NetworkManager connection UUIDs in some cases */
     uuid_t uuid;
 
