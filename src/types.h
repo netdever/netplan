@@ -221,6 +221,12 @@ struct netplan_net_definition {
     NetplanNetDefinition* vlan_link;
     gboolean has_vlans;
 
+    /* vxlan */
+    guint vxlan_vni;
+
+    /* vrf */
+    guint vrf_table;
+
     /* Configured custom MAC address */
     char* set_mac;
 
