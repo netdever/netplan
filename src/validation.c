@@ -336,7 +336,7 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
 
     if (nd->type == NETPLAN_DEF_TYPE_VRF) {
         if (nd->vrf_id == G_MAXUINT)
-            return yaml_error(npp, node, error, "%s: missing 'table' property", nd->table);
+            return yaml_error(npp, node, error, "%s: missing 'id' property", nd->id);
     }
 
     if (nd->type == NETPLAN_DEF_TYPE_TUNNEL) {
