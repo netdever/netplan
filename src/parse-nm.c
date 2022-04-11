@@ -652,6 +652,12 @@ netplan_parser_load_keyfile(NetplanParser* npp, const char* filename, GError** e
     /* Vlan: XXX: find a way to parse the "link:" (parent) connection */
     handle_generic_uint(kf, "vlan", "id", &nd->vlan_id, G_MAXUINT);
 
+    /* Vxlan */
+    handle_generic_uint(kf, "vxlan", "id", &nd->vxlan_id, G_MAXUINT);
+
+    /* Vrf */
+    handle_generic_uint(kf, "vrf", "id", &nd->vrf_id, G_MAXUINT);
+
     /* Bridge: XXX: find a way to parse the bridge-port.priority & bridge-port.path-cost values */
     handle_generic_uint(kf, "bridge", "priority", &nd->bridge_params.priority, 0);
     if (nd->bridge_params.priority)
