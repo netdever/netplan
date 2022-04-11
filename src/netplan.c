@@ -743,6 +743,16 @@ _serialize_yaml(
             YAML_STRING(def, event, emitter, "link", def->vlan_link->id);
     }
 
+    /* VXLAN settings */
+    if (def->type == NETPLAN_DEF_TYPE_VXLAN) {
+        YAML_UINT_DEFAULT(def, event, emitter, "vni", def->vxlan_vni, G_MAXUINT);
+    }
+
+    /* VRF settings */
+    if (def->type == NETPLAN_DEF_TYPE_VRF) {
+        YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
+    }
+
     /* Tunnel settings */
     if (def->type == NETPLAN_DEF_TYPE_TUNNEL) {
         write_tunnel_settings(event, emitter, def);
