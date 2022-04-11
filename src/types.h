@@ -223,9 +223,11 @@ struct netplan_net_definition {
 
     /* vxlan */
     guint vxlan_id;
+    NetplanNetDefinition* vxlan_link;
 
     /* vrf */
     guint vrf_id;
+    NetplanNetDefinition* vrf_link;
 
     /* Configured custom MAC address */
     char* set_mac;
