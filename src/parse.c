@@ -2412,14 +2412,14 @@ static const mapping_entry_handler vlan_def_handlers[] = {
 static const mapping_entry_handler vxlan_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
-    {"vni", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_vni)},
+    {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
     {NULL}
 };
 
 static const mapping_entry_handler vrf_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
-    {"table", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vrf_table)},
+    {"table", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vrf_id)},
     {NULL}
 };
 

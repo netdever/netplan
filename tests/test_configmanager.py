@@ -98,7 +98,7 @@ class TestConfigManager(unittest.TestCase):
       link: eth99
   vxlans:
     vxlan2:
-      vni: 2
+      id: 2
   vrfs:
     vrf2:
       table: 2

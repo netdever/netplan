@@ -175,8 +175,6 @@ struct netplan_net_definition {
     NetplanDefType type;
     NetplanBackend backend;
     char* id;
-    char* vni;
-    char* table;
     /* only necessary for NetworkManager connection UUIDs in some cases */
     uuid_t uuid;
 
@@ -224,10 +222,10 @@ struct netplan_net_definition {
     gboolean has_vlans;
 
     /* vxlan */
-    guint vxlan_vni;
+    guint vxlan_id;
 
     /* vrf */
-    guint vrf_table;
+    guint vrf_id;
 
     /* Configured custom MAC address */
     char* set_mac;

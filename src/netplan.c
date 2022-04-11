@@ -745,12 +745,12 @@ _serialize_yaml(
 
     /* VXLAN settings */
     if (def->type == NETPLAN_DEF_TYPE_VXLAN) {
-        YAML_UINT_DEFAULT(def, event, emitter, "vni", def->vxlan_vni, G_MAXUINT);
+        YAML_UINT_DEFAULT(def, event, emitter, "id", def->vxlan_id, G_MAXUINT);
     }
 
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
-        YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
+        YAML_UINT_DEFAULT(def, event, emitter, "id", def->vrf_id, G_MAXUINT);
     }
 
     /* Tunnel settings */
