@@ -2419,7 +2419,7 @@ static const mapping_entry_handler vxlan_def_handlers[] = {
 static const mapping_entry_handler vrf_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
-    {"table", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vrf_id)},
+    {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vrf_id)},
     {NULL}
 };
 
