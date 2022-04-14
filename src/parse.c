@@ -1905,9 +1905,20 @@ static const mapping_entry_handler vxlan_params_handlers[] = {
 };
 
 static gboolean
-handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
+handle_vxlan_params(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
 {
     return process_mapping(npp, node, vxlan_params_handlers, NULL, error);
+}
+
+static const mapping_entry_handler vxlan_network_handlers[] = {
+    {"bridge", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan_network.bridge)},
+    {NULL}
+};
+
+static gboolean
+handle_vxlan_network(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
+{
+    return process_mapping(npp, node, vxlan_network_handlers, NULL, error);
 }
 
 static gboolean
@@ -2430,7 +2441,8 @@ static const mapping_entry_handler vxlan_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
     {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
-    {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlans}}},
+    {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_params}}},
+    {"network", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_network}}},
     {NULL}
 };
 

@@ -122,10 +122,6 @@ type_str(const NetplanNetDefinition* def)
             return "bond";
         case NETPLAN_DEF_TYPE_VLAN:
             return "vlan";
-        case NETPLAN_DEF_TYPE_VXLAN:
-            return "vxlan";
-        case NETPLAN_DEF_TYPE_VRF:
-            return "vrf";
         case NETPLAN_DEF_TYPE_TUNNEL:
             if (def->tunnel.mode == NETPLAN_TUNNEL_MODE_WIREGUARD)
                 return "wireguard";
@@ -343,25 +339,6 @@ write_bond_parameters(const NetplanNetDefinition* def, GKeyFile *kf)
         g_key_file_set_string(kf, "bond", "lp_interval", def->bond_params.learn_interval);
     if (def->bond_params.primary_slave)
         g_key_file_set_string(kf, "bond", "primary", def->bond_params.primary_slave);
-}
-
-static void
-write_vxlan_parameters(const NetplanNetDefinition* def, GKeyFile *kf)
-{
-    if (def->vxlan_params.remote)
-        g_key_file_set_string(kf, "vxlan", "remote", def->vxlan_params.remote);
-    if (def->vxlan_params.local)
-        g_key_file_set_string(kf, "vxlan", "local", def->vxlan_params.local);
-    if (def->vxlan_params.group)
-        g_key_file_set_string(kf, "vxlan", "group", def->vxlan_params.group);
-    if (def->vxlan_params.tos)
-        g_key_file_set_integer(kf, "vxlan", "tos", def->vxlan_params.tos);
-    if (def->vxlan_params.ttl)
-        g_key_file_set_integer(kf, "vxlan", "ttl", def->vxlan_params.ttl);
-    if (def->vxlan_params.mac_learning)
-        g_key_file_set_boolean(kf, "vxlan", "mac_learning", def->vxlan_params.mac_learning);
-    if (def->vxlan_params.destination_port)
-        g_key_file_set_integer(kf, "vxlan", "destination_port", def->vxlan_params.destination_port);
 }
 
 static void
@@ -770,9 +747,6 @@ write_nm_conf_access_point(const NetplanNetDefinition* def, const char* rootdir,
 
     if (def->type == NETPLAN_DEF_TYPE_BOND)
         write_bond_parameters(def, kf);
-
-    if (def->type == NETPLAN_DEF_TYPE_VXLAN)
-        write_vxlan_parameters(def, kf);
 
     if (def->type == NETPLAN_DEF_TYPE_TUNNEL) {
         if (def->tunnel.mode == NETPLAN_TUNNEL_MODE_WIREGUARD) {

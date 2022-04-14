@@ -288,6 +288,10 @@ struct netplan_net_definition {
         guint destination_port;
     } vxlan_params;
 
+    struct {
+        char* bridge;
+    } vxlan_network;
+
     /* netplan-feature: modems */
     struct {
         char* apn;
