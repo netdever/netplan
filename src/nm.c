@@ -348,7 +348,6 @@ write_bond_parameters(const NetplanNetDefinition* def, GKeyFile *kf)
 static void
 write_vxlan_parameters(const NetplanNetDefinition* def, GKeyFile *kf)
 {
-    GString* tmp_val = NULL;
     if (def->vxlan_params.remote)
         g_key_file_set_string(kf, "vxlan", "remote", def->vxlan_params.remote);
     if (def->vxlan_params.local)
