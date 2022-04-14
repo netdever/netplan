@@ -289,7 +289,7 @@ struct netplan_net_definition {
     } vxlan_params;
 
     struct {
-        char* bridge;
+        char* vxlan_bridge;
     } vxlan_network;
 
     /* netplan-feature: modems */

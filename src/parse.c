@@ -1911,7 +1911,7 @@ handle_vxlan_params(NetplanParser* npp, yaml_node_t* node, const void* _, GError
 }
 
 static const mapping_entry_handler vxlan_network_handlers[] = {
-    {"bridge", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan_network.bridge)},
+    {"vxlan-bridge", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan_network.vxlan_bridge)},
     {NULL}
 };
 

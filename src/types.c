@@ -295,7 +295,7 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     FREE_AND_NULLIFY(netdef->vxlan_params.group);
     memset(&netdef->vxlan_params, 0, sizeof(netdef->vxlan_params));
 
-    FREE_AND_NULLIFY(netdef->vxlan_network.bridge);
+    FREE_AND_NULLIFY(netdef->vxlan_network.vxlan_bridge);
     memset(&netdef->vxlan_network, 0, sizeof(netdef->vxlan_network));
 
     FREE_AND_NULLIFY(netdef->modem_params.apn);
