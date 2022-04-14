@@ -772,6 +772,10 @@ netplan_netdef_write_network_file(
             g_string_append_printf(network, "PrimarySlave=true\n");
     }
 
+    if (def->bridge && def->vxlan) {
+        g_string_append_printf(network, "Bridge=%s\n", def->bridge);
+    }
+
     if (def->has_vlans && def->backend != NETPLAN_BACKEND_OVS) {
         /* iterate over all netdefs to find VLANs attached to us */
         GList *l = np_state->netdefs_ordered;
