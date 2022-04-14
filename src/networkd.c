@@ -660,13 +660,8 @@ netplan_netdef_write_network_file(
 
     SET_OPT_OUT_PTR(has_been_written, FALSE);
 
-    switch (def->type) {
-        case NETPLAN_DEF_TYPE_VXLAN:
-            write_vxlan_network(def, s);
-            break;
-
-        default:
-            break;
+    if (def->type == NETPLAN_DEF_TYPE_VXLAN && def->vxlan_network) {
+        write_vxlan_network(def, s);
     }
 
     if (def->type == NETPLAN_DEF_TYPE_VLAN && def->sriov_vlan_filter) {
