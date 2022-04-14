@@ -2442,7 +2442,7 @@ static const mapping_entry_handler vxlan_def_handlers[] = {
     COMMON_BACKEND_HANDLERS,
     {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
     {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_params}}},
-    {"network", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_network}}},
+    {"vxlan-netext", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_network}}},
     {NULL}
 };
 
