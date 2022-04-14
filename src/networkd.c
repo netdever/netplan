@@ -405,6 +405,9 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
 
+    if (params->len)
+        g_string_append_printf(s, "", params->str);
+
     g_string_free(params, TRUE);
 }
 
