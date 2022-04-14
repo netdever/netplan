@@ -772,7 +772,7 @@ netplan_netdef_write_network_file(
             g_string_append_printf(network, "PrimarySlave=true\n");
     }
 
-    if (def->bridge && def->vxlan) {
+    if (def->bridge && def->vxlan_id) {
         g_string_append_printf(network, "Bridge=%s\n", def->bridge);
     }
 
