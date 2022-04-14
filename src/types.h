@@ -282,10 +282,10 @@ struct netplan_net_definition {
         char* remote;
         char* local;
         char* group;
-        guint* tos;
-        guint* ttl;
-        gboolean* maclearning;
-        guint* destinationport;
+        guint tos;
+        guint ttl;
+        gboolean maclearning;
+        guint destinationport;
     } vxlan_params;
 
     /* netplan-feature: modems */
