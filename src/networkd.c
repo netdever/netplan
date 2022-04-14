@@ -418,8 +418,8 @@ write_vxlan_network(const NetplanNetDefinition* def, GString* s)
 
     params = g_string_sized_new(200);
 
-    if (def->vxlan_network.vxlan_bridge)
-        g_string_append_printf(params, "\nBridge=%s", def->vxlan_network.vxlan_bridge);
+    if (def->vxlan_network.bridge)
+        g_string_append_printf(params, "\nBridge=%s", def->vxlan_network.bridge);
 
     if (params->len)
         g_string_append_printf(s, "%s\n", params->str);

@@ -233,10 +233,10 @@ static gboolean
 write_vxlan_network(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def)
 {
     if (DIRTY(def, def->vxlan_network)
-        || def->vxlan_network.vxlan_bridge) {
-        YAML_SCALAR_PLAIN(event, emitter, "vxlan-netext");
+        || def->vxlan_network.bridge) {
+        YAML_SCALAR_PLAIN(event, emitter, "network");
         YAML_MAPPING_OPEN(event, emitter);
-        YAML_STRING(def, event, emitter, "vxlan-bridge", def->vxlan_network.vxlan_bridge);
+        YAML_STRING(def, event, emitter, "bridge", def->vxlan_network.bridge);
         YAML_MAPPING_CLOSE(event, emitter);
     }
     return TRUE;
