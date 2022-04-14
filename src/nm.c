@@ -350,19 +350,19 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GKeyFile *kf)
 {
     GString* tmp_val = NULL;
     if (def->vxlan_params.remote)
-        g_string_append_printf(kf, "vxlan", "remote", def->vxlan_params.remote);
+        g_key_file_set_string(kf, "vxlan", "remote", def->vxlan_params.remote);
     if (def->vxlan_params.local)
-        g_string_append_printf(kf, "vxlan", "local", def->vxlan_params.local);
+        g_key_file_set_string(kf, "vxlan", "local", def->vxlan_params.local);
     if (def->vxlan_params.group)
-        g_string_append_printf(kf, "vxlan", "group", def->vxlan_params.group);
+        g_key_file_set_string(kf, "vxlan", "group", def->vxlan_params.group);
     if (def->vxlan_params.tos)
-        g_string_append_printf(kf, "vxlan", "tos", def->vxlan_params.tos);
+        g_key_file_set_integer(kf, "vxlan", "tos", def->vxlan_params.tos);
     if (def->vxlan_params.ttl)
-        g_string_append_printf(kf, "vxlan", "ttl", def->vxlan_params.ttl);
+        g_key_file_set_integer(kf, "vxlan", "ttl", def->vxlan_params.ttl);
     if (def->vxlan_params.maclearning)
-        g_string_append_printf(kf, "vxlan", "mac_learning", def->vxlan_params.maclearning);
+        g_key_file_set_boolean(kf, "vxlan", "mac_learning", def->vxlan_params.maclearning);
     if (def->vxlan_params.destinationport)
-        g_string_append_printf(kf, "vxlan", "destination_port", def->vxlan_params.destinationport);
+        g_key_file_set_integer(kf, "vxlan", "destination_port", def->vxlan_params.destinationport);
 }
 
 static void
