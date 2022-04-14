@@ -229,6 +229,7 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
 err_path: return FALSE; // LCOV_EXCL_LINE
 }
 
+static gboolean
 write_vxlan_network(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def)
 {
     if (DIRTY(def, def->vxlan_network)
