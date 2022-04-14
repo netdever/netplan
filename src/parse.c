@@ -1899,8 +1899,8 @@ static const mapping_entry_handler vxlan_params_handlers[] = {
     {"group", YAML_SCALAR_NODE, {.generic=handle_netdef_ip4}, netdef_offset(vxlan_params.group)},
     {"tos", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.tos)},
     {"ttl", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.ttl)},
-    {"maclearning", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(vxlan_params.maclearning)},
-    {"destinationport", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.destinationport)},
+    {"mac-learning", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(vxlan_params.mac_learning)},
+    {"destination-port", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.destination_port)},
     {NULL}
 };
 

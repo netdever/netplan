@@ -359,9 +359,9 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GKeyFile *kf)
     if (def->vxlan_params.ttl)
         g_key_file_set_integer(kf, "vxlan", "ttl", def->vxlan_params.ttl);
     if (def->vxlan_params.maclearning)
-        g_key_file_set_boolean(kf, "vxlan", "mac_learning", def->vxlan_params.maclearning);
+        g_key_file_set_boolean(kf, "vxlan", "mac_learning", def->vxlan_params.mac_learning);
     if (def->vxlan_params.destinationport)
-        g_key_file_set_integer(kf, "vxlan", "destination_port", def->vxlan_params.destinationport);
+        g_key_file_set_integer(kf, "vxlan", "destination_port", def->vxlan_params.destination_port);
 }
 
 static void

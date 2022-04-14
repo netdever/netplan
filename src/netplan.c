@@ -212,8 +212,8 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
         || def->vxlan_params.group
         || def->vxlan_params.tos
         || def->vxlan_params.ttl
-        || def->vxlan_params.maclearning
-        || def->vxlan_params.destinationport) {
+        || def->vxlan_params.mac_learning
+        || def->vxlan_params.destination_port) {
         YAML_SCALAR_PLAIN(event, emitter, "parameters");
         YAML_MAPPING_OPEN(event, emitter);
         YAML_STRING(def, event, emitter, "remote", def->vxlan_params.remote);
@@ -221,8 +221,8 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
         YAML_STRING(def, event, emitter, "group", def->vxlan_params.group);
         YAML_UINT_0(def, event, emitter, "tos", def->vxlan_params.tos);
         YAML_UINT_0(def, event, emitter, "ttl", def->vxlan_params.ttl);
-        YAML_BOOL_FALSE(def, event, emitter, "maclearning", def->vxlan_params.maclearning);
-        YAML_UINT_0(def, event, emitter, "destinationport", def->vxlan_params.destinationport);
+        YAML_BOOL_FALSE(def, event, emitter, "mac-learning", def->vxlan_params.mac_learning);
+        YAML_UINT_0(def, event, emitter, "destination-port", def->vxlan_params.destination_port);
         YAML_MAPPING_CLOSE(event, emitter);
     }
     return TRUE;
