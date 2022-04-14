@@ -219,10 +219,10 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
         YAML_STRING(def, event, emitter, "remote", def->vxlan_params.remote);
         YAML_STRING(def, event, emitter, "local", def->vxlan_params.local);
         YAML_STRING(def, event, emitter, "group", def->vxlan_params.group);
-        YAML_STRING(def, event, emitter, "tos", def->vxlan_params.tos);
-        YAML_STRING(def, event, emitter, "ttl", def->vxlan_params.ttl);
-        YAML_STRING(def, event, emitter, "maclearning", def->vxlan_params.maclearning);
-        YAML_STRING(def, event, emitter, "destinationport", def->vxlan_params.destinationport);
+        YAML_UINT_0(def, event, emitter, "tos", def->vxlan_params.tos);
+        YAML_UINT_0(def, event, emitter, "ttl", def->vxlan_params.ttl);
+        YAML_BOOL_FALSE(def, event, emitter, "maclearning", def->vxlan_params.maclearning);
+        YAML_UINT_0(def, event, emitter, "destinationport", def->vxlan_params.destinationport);
         YAML_MAPPING_CLOSE(event, emitter);
     }
     return TRUE;
