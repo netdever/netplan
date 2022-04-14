@@ -660,7 +660,7 @@ netplan_netdef_write_network_file(
 
     SET_OPT_OUT_PTR(has_been_written, FALSE);
 
-    if (def->type == NETPLAN_DEF_TYPE_VXLAN && def->vxlan_network) {
+    if (def->type == NETPLAN_DEF_TYPE_VXLAN) {
         write_vxlan_network(def, s);
     }
 
