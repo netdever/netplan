@@ -772,6 +772,9 @@ write_nm_conf_access_point(const NetplanNetDefinition* def, const char* rootdir,
     if (def->type == NETPLAN_DEF_TYPE_BOND)
         write_bond_parameters(def, kf);
 
+    if (def->type == NETPLAN_DEF_TYPE_VXLAN)
+        write_vxlan_parameters(def, kf);
+
     if (def->type == NETPLAN_DEF_TYPE_TUNNEL) {
         if (def->tunnel.mode == NETPLAN_TUNNEL_MODE_WIREGUARD) {
             if (!write_wireguard_params(def, kf, error))

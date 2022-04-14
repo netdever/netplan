@@ -450,6 +450,7 @@ write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const ch
 
         case NETPLAN_DEF_TYPE_VXLAN:
             g_string_append_printf(s, "Kind=vxlan\n\n[VXLAN]\nVNI=%u\n", def->vxlan_id);
+            write_vxlan_parameters(def, s);
             break;
 
         case NETPLAN_DEF_TYPE_VRF:
