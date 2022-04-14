@@ -1893,6 +1893,23 @@ handle_bonding(NetplanParser* npp, yaml_node_t* node, const void* _, GError** er
     return process_mapping(npp, node, bond_params_handlers, NULL, error);
 }
 
+static const mapping_entry_handler vxlan_params_handlers[] = {
+    {"remote", YAML_SCALAR_NODE, {.generic=handle_netdef_ip4}, netdef_offset(vxlan_params.remote)},
+    {"local", YAML_SCALAR_NODE, {.generic=handle_netdef_ip4}, netdef_offset(vxlan_params.local)},
+    {"group", YAML_SCALAR_NODE, {.generic=handle_netdef_ip4}, netdef_offset(vxlan_params.group)},
+    {"tos", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.tos)},
+    {"ttl", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.ttl)},
+    {"maclearning", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(vxlan_params.maclearning)},
+    {"destinationport", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_params.destinationport)},
+    {NULL}
+};
+
+static gboolean
+handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
+{
+    return process_mapping(npp, node, vxlan_params_handlers, NULL, error);
+}
+
 static gboolean
 handle_dhcp_identifier(NetplanParser* npp, yaml_node_t* node, const void* data, GError** error)
 {
@@ -2413,6 +2430,7 @@ static const mapping_entry_handler vxlan_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
     {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
+    {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlans}}},
     {NULL}
 };
 
