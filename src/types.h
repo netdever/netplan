@@ -278,6 +278,16 @@ struct netplan_net_definition {
         char* primary_slave;
     } bond_params;
 
+    struct {
+        char* remote;
+        char* local;
+        char* group;
+        guint tos;
+        guint ttl;
+        gboolean maclearning;
+        guint destinationport;
+    } vxlan_params;
+
     /* netplan-feature: modems */
     struct {
         char* apn;

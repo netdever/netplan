@@ -204,6 +204,32 @@ err_path: return FALSE; // LCOV_EXCL_LINE
 }
 
 static gboolean
+write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def)
+{
+    if (DIRTY(def, def->vxlan_params)
+        || def->vxlan_params.remote
+        || def->vxlan_params.local
+        || def->vxlan_params.group
+        || def->vxlan_params.tos
+        || def->vxlan_params.ttl
+        || def->vxlan_params.maclearning
+        || def->vxlan_params.destinationport) {
+        YAML_SCALAR_PLAIN(event, emitter, "parameters");
+        YAML_MAPPING_OPEN(event, emitter);
+        YAML_STRING(def, event, emitter, "remote", def->vxlan_params.remote);
+        YAML_STRING(def, event, emitter, "local", def->vxlan_params.local);
+        YAML_STRING(def, event, emitter, "group", def->vxlan_params.group);
+        YAML_STRING(def, event, emitter, "tos", def->vxlan_params.tos);
+        YAML_STRING(def, event, emitter, "ttl", def->vxlan_params.ttl);
+        YAML_STRING(def, event, emitter, "maclearning", def->vxlan_params.maclearning);
+        YAML_STRING(def, event, emitter, "destinationport", def->vxlan_params.destinationport);
+        YAML_MAPPING_CLOSE(event, emitter);
+    }
+    return TRUE;
+err_path: return FALSE; // LCOV_EXCL_LINE
+}
+
+static gboolean
 write_bridge_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def, const GArray *interfaces)
 {
     if (def->custom_bridging || DIRTY_COMPLEX(def, def->bridge_params)) {
@@ -730,6 +756,7 @@ _serialize_yaml(
             YAML_SEQUENCE_CLOSE(event, emitter);
         }
         write_bond_params(event, emitter, def);
+        write_vxlan_params(event, emitter, def);
         write_bridge_params(event, emitter, def, tmp_arr);
         g_array_free(tmp_arr, TRUE);
     }

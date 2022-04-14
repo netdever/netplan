@@ -700,6 +700,15 @@ netplan_parser_load_keyfile(NetplanParser* npp, const char* filename, GError** e
     handle_generic_bool(kf, "bond", "all_slaves_active", &nd->bond_params.all_slaves_active);
     parse_bond_arp_ip_targets(kf, &nd->bond_params.arp_ip_targets);
 
+    /* VXLANs */
+    handle_generic_str(kf, "vxlan", "remote", &nd->vxlan_params.remote);
+    handle_generic_str(kf, "vxlan", "local", &nd->vxlan_params.local);
+    handle_generic_str(kf, "vxlan", "group", &nd->vxlan_params.group);
+    handle_generic_uint(kf, "vxlan", "tos", &nd->vxlan_params.tos);
+    handle_generic_uint(kf, "vxlan", "ttl", &nd->vxlan_params.ttl);
+    handle_generic_bool(kf, "vxlan", "mac_learning", &nd->vxlan_params.mac_learning);
+    handle_generic_uint(kf, "vxlan", "destination_port", &nd->vxlan_params.destination_port);
+
     /* Special handling for WiFi "access-points:" mapping */
     if (nd->type == NETPLAN_DEF_TYPE_WIFI) {
         ap = g_new0(NetplanWifiAccessPoint, 1);

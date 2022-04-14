@@ -290,6 +290,15 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     FREE_AND_NULLIFY(netdef->bond_params.primary_slave);
     memset(&netdef->bond_params, 0, sizeof(netdef->bond_params));
 
+    FREE_AND_NULLIFY(netdef->vxlan_params.remote);
+    FREE_AND_NULLIFY(netdef->vxlan_params.local);
+    FREE_AND_NULLIFY(netdef->vxlan_params.group);
+    FREE_AND_NULLIFY(netdef->vxlan_params.tos);
+    FREE_AND_NULLIFY(netdef->vxlan_params.ttl);
+    FREE_AND_NULLIFY(netdef->vxlan_params.maclearning);
+    FREE_AND_NULLIFY(netdef->vxlan_params.destinationport);
+    memset(&netdef->vxlan_params, 0, sizeof(netdef->vxlan_params));
+
     FREE_AND_NULLIFY(netdef->modem_params.apn);
     FREE_AND_NULLIFY(netdef->modem_params.device_id);
     FREE_AND_NULLIFY(netdef->modem_params.network_id);

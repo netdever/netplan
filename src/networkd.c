@@ -384,6 +384,34 @@ write_bond_parameters(const NetplanNetDefinition* def, GString* s)
 }
 
 static void
+write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
+{
+    GString* params = NULL;
+
+    params = g_string_sized_new(200);
+
+    if (def->vxlan_params.remote)
+        g_string_append_printf(params, "\nRemote=%s", def->vxlan_params.remote);
+    if (def->vxlan_params.local)
+        g_string_append_printf(params, "\nLocal=%s", def->vxlan_params.local);
+    if (def->vxlan_params.group)
+        g_string_append_printf(params, "\nGroup=%s", def->vxlan_params.group);
+    if (def->vxlan_params.tos)
+        g_string_append_printf(params, "\nTOS=%d", def->vxlan_params.tos);
+    if (def->vxlan_params.ttl)
+        g_string_append_printf(params, "\nTTL=%d", def->vxlan_params.ttl);
+    if (def->vxlan_params.maclearning)
+        g_string_append_printf(params, "\nMacLearning=%s", def->vxlan_params.maclearning);
+    if (def->vxlan_params.destinationport)
+        g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destinationport);
+
+    if (params->len)
+        g_string_append_printf(s, "\n[VXLAN]%s\n", params->str);
+
+    g_string_free(params, TRUE);
+}
+
+static void
 write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const char* path)
 {
     GString* s = NULL;
