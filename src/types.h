@@ -289,7 +289,7 @@ struct netplan_net_definition {
         guint tos;
         guint ttl;
         gboolean mac_learning;
-        guint fdb_aging;
+        guint fdb_ageing;
         guint max_fdb_entries;
         gboolean reduce_arp_proxy;
         gboolean l2_miss_notification;
@@ -301,7 +301,7 @@ struct netplan_net_definition {
         gboolean remote_checksum_tx;
         gboolean remote_checksum_rx;
         gboolean group_policy_extension;
-        gboolean group_protocol_extension;
+        gboolean generic_protocol_extension;
         guint destination_port;
         char* port_range;
         guint flow_label;

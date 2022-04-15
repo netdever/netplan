@@ -296,7 +296,7 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     netdef->vxlan_params.tos = 0;
     netdef->vxlan_params.ttl = 0;
     netdef->vxlan_params.mac_learning = FALSE;
-    netdef->vxlan_params.fdb_aging = 0;
+    netdef->vxlan_params.fdb_ageing = 0;
     netdef->vxlan_params.max_fdb_entries = 0;
     netdef->vxlan_params.reduce_arp_proxy = FALSE;
     netdef->vxlan_params.l2_miss_notification = FALSE;
@@ -308,7 +308,7 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     netdef->vxlan_params.remote_checksum_tx = FALSE;
     netdef->vxlan_params.remote_checksum_rx = FALSE;
     netdef->vxlan_params.group_policy_extension = FALSE;
-    netdef->vxlan_params.group_protocol_extension = FALSE;
+    netdef->vxlan_params.generic_protocol_extension = FALSE;
     netdef->vxlan_params.destination_port = 0;
     FREE_AND_NULLIFY(netdef->vxlan_params.port_range);
     netdef->vxlan_params.flow_label = 0;
