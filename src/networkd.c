@@ -670,6 +670,10 @@ netplan_netdef_write_network_file(
         is_optional = TRUE;
     }
 
+    /* VRF linkage */
+    if (def->vrf)
+        g_string_append_printf(network, "VRF=%s\n", def->vrf);
+
     if (is_optional || def->optional_addresses) {
         if (is_optional) {
             g_string_append(link, "RequiredForOnline=no\n");
@@ -864,10 +868,6 @@ netplan_netdef_write_network_file(
         g_string_append_printf(network, "\n[Bridge]\n");
         g_string_append_printf(network, "NeighborSuppression=%s\n", def->neigh_suppress ? "True" : "False");
     }
-
-    /* VRF linkage */
-    if (def->vrf)
-        g_string_append_printf(network, "VRF=%s\n", def->vrf);
 
     if (network->len > 0 || link->len > 0) {
         s = g_string_sized_new(200);
