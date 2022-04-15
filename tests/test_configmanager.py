@@ -71,7 +71,17 @@ class TestConfigManager(unittest.TestCase):
     ports: [[patcha, patchb]]
     other-config:
       disable-in-band: true
+  vrfs:
+    vrf1005:
+      table: 1005
+    vrf1006:
+      table: 1006
   ethernets:
+    lo:
+      addresses:
+      - 192.168.10.10/32
+      vxlans:
+        names: [vxlan1, vxlan1005]
     eth0:
       dhcp4: false
     ethbr1:
@@ -96,19 +106,36 @@ class TestConfigManager(unittest.TestCase):
     vlan2:
       id: 2
       link: eth99
-  vxlans:
-    vxlan2:
-      id: 2
-  vrfs:
-    vrf2:
-      table: 2
   bridges:
     br3:
       interfaces: [ ethbr1 ]
+      vrf: vrf1005
     br4:
       interfaces: [ ethbr2 ]
+      vrf: vrf1005
       parameters:
         stp: on
+  vxlans:
+    vxlan1005:
+      vni: 1005
+      mtu: 8950
+      accept-ra: no
+      bridge: br3
+      neigh-suppress: true
+      parameters:
+        mac-learning: false
+        destination-port: 4789
+        local: 192.168.10.10
+    vxlan1:
+      vni: 1
+      mtu: 8950
+      accept-ra: no
+      bridge: br4
+      neigh-suppress: true
+      parameters:
+        mac-learning: false
+        destination-port: 4789
+        local: 192.168.10.10
   bonds:
     bond5:
       interfaces: [ ethbond1 ]
@@ -139,6 +166,7 @@ class TestConfigManager(unittest.TestCase):
 
     def test_parse(self):
         self.configmanager.parse()
+        self.assertIn('lo', self.configmanager.ethernets)
         self.assertIn('eth0', self.configmanager.ethernets)
         self.assertIn('bond6', self.configmanager.bonds)
         self.assertIn('eth0', self.configmanager.physical_interfaces)
@@ -157,9 +185,11 @@ class TestConfigManager(unittest.TestCase):
         self.assertEquals(2, self.configmanager.version)
         self.assertEquals('networkd', self.configmanager.renderer)
         self.assertIn('fallback', self.configmanager.nm_devices)
+        self.assertIn('vrf1005', self.configmanager.virtual_interfaces)
         self.assertIn('vlan2', self.configmanager.virtual_interfaces)
         self.assertIn('br3', self.configmanager.virtual_interfaces)
         self.assertIn('br4', self.configmanager.virtual_interfaces)
+        self.assertIn('vxlan1005', self.configmanager.virtual_interfaces)
         self.assertIn('bond5', self.configmanager.virtual_interfaces)
         self.assertIn('bond6', self.configmanager.virtual_interfaces)
         self.assertIn('he-ipv6', self.configmanager.virtual_interfaces)
