@@ -449,12 +449,12 @@ write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const ch
             break;
 
         case NETPLAN_DEF_TYPE_VXLAN:
-            g_string_append_printf(s, "Kind=vxlan\n\n[VXLAN]\nVNI=%u", def->vxlan_id);
+            g_string_append_printf(s, "Kind=vxlan\n\n[VXLAN]\nVNI=%u", def->vxlan_vni);
             write_vxlan_parameters(def, s);
             break;
 
         case NETPLAN_DEF_TYPE_VRF:
-            g_string_append_printf(s, "Kind=vrf\n\n[VRF]\nTable=%u\n", def->vrf_id);
+            g_string_append_printf(s, "Kind=vrf\n\n[VRF]\nTable=%u\n", def->vrf_table);
             break;
 
         case NETPLAN_DEF_TYPE_TUNNEL:

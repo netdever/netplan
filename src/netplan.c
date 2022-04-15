@@ -786,7 +786,7 @@ _serialize_yaml(
 
     /* VXLAN settings */
     if (def->type == NETPLAN_DEF_TYPE_VXLAN) {
-        YAML_UINT_DEFAULT(def, event, emitter, "id", def->vxlan_id, G_MAXUINT);
+        YAML_UINT_DEFAULT(def, event, emitter, "vni", def->vxlan_vni, G_MAXUINT);
         YAML_STRING(def, event, emitter, "bridge", def->vxlan_bridge);
         YAML_BOOL_FALSE(def, event, emitter, "neigh-suppress", def->neigh_suppress);
     }
@@ -797,7 +797,7 @@ _serialize_yaml(
 
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
-        YAML_UINT_DEFAULT(def, event, emitter, "id", def->vrf_id, G_MAXUINT);
+        YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
     }
 
     /* Interface VRF linkage */

@@ -222,7 +222,7 @@ struct netplan_net_definition {
     gboolean has_vlans;
 
     /* vxlan */
-    guint vxlan_id;
+    guint vxlan_vni;
     NetplanNetDefinition* vxlan_link;
     char* vxlan_bridge;
     GArray* vxlans;
@@ -230,7 +230,7 @@ struct netplan_net_definition {
 
     /* vrf */
     char* vrf;
-    guint vrf_id;
+    guint vrf_table;
     NetplanNetDefinition* vrf_link;
 
     /* Configured custom MAC address */
