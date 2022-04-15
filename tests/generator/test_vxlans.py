@@ -95,8 +95,10 @@ ConfigureWithoutCarrier=yes
         destination-port: 4789
         local: 192.168.10.10''')
 
-        self.assert_networkd({'vxlan1005.netdev': '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005\nLocal=192.168.10.10\nDestinationPort=4789',
-                              'vxlan1005.network': '''[Match]
+        self.assert_networkd({
+          'vxlan1005.netdev':
+          '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005\nLocal=192.168.10.10\nDestinationPort=4789',
+          'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
 [Network]
