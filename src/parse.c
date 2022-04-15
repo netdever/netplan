@@ -2381,6 +2381,10 @@ static const mapping_entry_handler dhcp6_overrides_handlers[] = {
     {"generic-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(generic_receive_offload)}, \
     {"large-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(large_receive_offload)}
 
+/* Handlers for VXLANs */
+#define VXLAN_LINK_HANDLERS \
+    {"bridge", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan_bridge)}
+
 static const mapping_entry_handler ethernet_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
@@ -2429,6 +2433,7 @@ static const mapping_entry_handler vlan_def_handlers[] = {
 static const mapping_entry_handler vxlan_def_handlers[] = {
     COMMON_LINK_HANDLERS,
     COMMON_BACKEND_HANDLERS,
+    VXLAN_LINK_HANDLERS,
     {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
     {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_params}}},
     {NULL}
