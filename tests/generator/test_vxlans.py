@@ -28,8 +28,9 @@ class TestNetworkd(TestBase):
   version: 2
   vxlans:
     vxlan1005:
-      vni: 1005
-      bridge: br1005''')
+      bridge: br1005
+      neigh-suppress: false
+      vni: 1005''')
         self.assert_networkd({'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
@@ -37,13 +38,8 @@ Name=vxlan1005
 LinkLocalAddressing=ipv6
 ConfigureWithoutCarrier=yes
 Bridge=br1005''',
-                              'vxlan1005.netdev': '''[NetDev]
-Name=vxlan1005
-Kind=vxlan
-
-[VXLAN]
-VNI=1005
-DestinationPort=4789'''})
+                              'vxlan1005.netdev':
+                              '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005'})
 
     def test_vxlan_destinaton_port(self):
         self.generate('''network:
@@ -80,20 +76,20 @@ ConfigureWithoutCarrier=yes
 
     def test_vxlan_params(self):
         self.generate('''network:
-  version: 2
   ethernets:
     lo:
       addresses:
       - 192.168.10.10/32
       vxlans:
-        names: [ vxlan1005 ]
+        names:
+        - vxlan1005
   vxlans:
     vxlan1005:
-      vni: 1005
       neigh-suppress: false
       parameters:
         destination-port: 4789
-        local: 192.168.10.10''')
+        local: 192.168.10.10
+      vni: 1005''')
 
         self.assert_networkd({
           'vxlan1005.netdev':
