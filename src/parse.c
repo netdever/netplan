@@ -1859,6 +1859,23 @@ handle_bond_primary_slave(NetplanParser* npp, yaml_node_t* node, const void* dat
     return TRUE;
 }
 
+static gboolean
+handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
+{
+    for (yaml_node_item_t *i = node->data.sequence.items.start; i < node->data.sequence.items.top; i++) {
+        yaml_node_t *entry = yaml_document_get_node(&npp->doc, *i);
+        assert_type(npp, entry, YAML_SCALAR_NODE);
+
+        if (!npp->current.netdef->vxlans)
+            npp->current.netdef->vxlans = g_array_new(FALSE, FALSE, sizeof(char*));
+        char* s = g_strdup(scalar(entry));
+        g_array_append_val(npp->current.netdef->vxlans, s);
+    }
+
+    mark_data_as_dirty(npp, &npp->current.netdef->vxlans);
+    return TRUE;
+}
+
 static const mapping_entry_handler bond_params_handlers[] = {
     {"mode", YAML_SCALAR_NODE, {.generic=handle_bond_mode}, netdef_offset(bond_params.mode)},
     {"lacp-rate", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(bond_params.lacp_rate)},
@@ -2437,6 +2454,11 @@ static const mapping_entry_handler vxlan_def_handlers[] = {
     VXLAN_LINK_HANDLERS,
     {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
     {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_params}}},
+    {NULL}
+};
+
+static const mapping_entry_handler vxlans_handlers[] = {
+    {"vxlans", YAML_SEQUENCE_NODE, {.generic=handle_vxlans}},
     {NULL}
 };
 
