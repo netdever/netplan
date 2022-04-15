@@ -853,7 +853,7 @@ netplan_netdef_write_network_file(
     }
 
     if (def->vxlan_bridge) {
-        g_string_append_printf(network, "Bridge=%d\n", def->vxlan_bridge);
+        g_string_append_printf(network, "Bridge=%s\n", def->vxlan_bridge);
     }
 
     if (network->len > 0 || link->len > 0) {
