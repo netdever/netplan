@@ -60,9 +60,9 @@ UseMTU=true
 Name=br0
 
 [Network]
+VRF=vrf1005
 LinkLocalAddressing=ipv6
 ConfigureWithoutCarrier=yes
-VRF=vrf1005
 ''',
                               'br0.netdev': '''[NetDev]
 Name=br0
