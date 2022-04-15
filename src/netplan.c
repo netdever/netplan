@@ -776,6 +776,9 @@ _serialize_yaml(
         YAML_STRING(def, event, emitter, "bridge", def->vxlan_bridge);
     }
 
+    /* VXLAN options */
+    YAML_STRING(def, event, emitter, "vxlan", def->vxlan);
+
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
         YAML_UINT_DEFAULT(def, event, emitter, "id", def->vrf_id, G_MAXUINT);
