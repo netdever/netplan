@@ -856,9 +856,9 @@ netplan_netdef_write_network_file(
         g_string_append_printf(network, "Bridge=%s\n", def->vxlan_bridge);
 
     /* VXLAN options */
-    if (def->vxlan)
-        for (unsigned i = 0; i < def->vxlan->len; ++i)
-            g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlan, char*, i));
+    if (def->vxlans)
+        for (unsigned i = 0; i < def->vxlans->len; ++i)
+            g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlans, char*, i));
 
     if (network->len > 0 || link->len > 0) {
         s = g_string_sized_new(200);
