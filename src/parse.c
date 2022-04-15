@@ -2377,7 +2377,8 @@ static const mapping_entry_handler dhcp6_overrides_handlers[] = {
     {"optional-addresses", YAML_SEQUENCE_NODE, {.generic=handle_optional_addresses}}, \
     {"renderer", YAML_SCALAR_NODE, {.generic=handle_netdef_renderer}}, \
     {"routes", YAML_SEQUENCE_NODE, {.generic=handle_routes}}, \
-    {"routing-policy", YAML_SEQUENCE_NODE, {.generic=handle_ip_rules}}
+    {"routing-policy", YAML_SEQUENCE_NODE, {.generic=handle_ip_rules}}, \
+    {"vxlans", YAML_MAPPING_NODE, {.map={.handlers=vxlans_handlers}}}
 
 #define COMMON_BACKEND_HANDLERS \
     {"networkmanager", YAML_MAPPING_NODE, {.map={.handlers=nm_backend_settings_handlers}}}, \
