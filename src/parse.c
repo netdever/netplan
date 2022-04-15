@@ -2383,7 +2383,8 @@ static const mapping_entry_handler dhcp6_overrides_handlers[] = {
     {"renderer", YAML_SCALAR_NODE, {.generic=handle_netdef_renderer}}, \
     {"routes", YAML_SEQUENCE_NODE, {.generic=handle_routes}}, \
     {"routing-policy", YAML_SEQUENCE_NODE, {.generic=handle_ip_rules}}, \
-    {"vxlans", YAML_MAPPING_NODE, {.map={.handlers=vxlans_handlers}}}
+    {"vxlans", YAML_MAPPING_NODE, {.map={.handlers=vxlans_handlers}}}, \
+    {"vrf", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vrf)}
 
 #define COMMON_BACKEND_HANDLERS \
     {"networkmanager", YAML_MAPPING_NODE, {.map={.handlers=nm_backend_settings_handlers}}}, \
@@ -2402,9 +2403,7 @@ static const mapping_entry_handler dhcp6_overrides_handlers[] = {
     {"tcp6-segmentation-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(tcp6_segmentation_offload)}, \
     {"generic-segmentation-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(generic_segmentation_offload)}, \
     {"generic-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(generic_receive_offload)}, \
-    {"large-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(large_receive_offload)}, \
-    {"vxlans", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlans)}, \
-    {"vrf", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vrf)}
+    {"large-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(large_receive_offload)}
 
 /* Handlers for VXLANs */
 #define VXLAN_LINK_HANDLERS \
