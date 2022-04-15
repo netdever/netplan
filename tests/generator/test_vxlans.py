@@ -73,16 +73,8 @@ ConfigureWithoutCarrier=yes
     def test_vxlan_params(self):
         self.generate('''network:
   version: 2
-  ethernets:
-    lo:
-      addresses:
-      - 192.168.10.10/32
-      vxlans:
-        names:
-        - vxlan1005
   vxlans:
     vxlan1005:
-      neigh-suppress: false
       parameters:
         destination-port: 4789
         local: 192.168.10.10
