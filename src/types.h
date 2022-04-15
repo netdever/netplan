@@ -224,6 +224,7 @@ struct netplan_net_definition {
     /* vxlan */
     guint vxlan_id;
     NetplanNetDefinition* vxlan_link;
+    char* vxlan_bridge;
 
     /* vrf */
     guint vrf_id;
