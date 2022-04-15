@@ -78,12 +78,9 @@ class TestConfigManager(unittest.TestCase):
       table: 1006
   ethernets:
     lo:
-      addresses:
-      - 192.168.10.10/32
+      addresses: [ 192.168.10.10/32 ]
       vxlans:
-        names:
-        - vxlan1
-        - vxlan1005
+        names: [vxlan1, vxlan1005]
     eth0:
       dhcp4: false
     ethbr1:

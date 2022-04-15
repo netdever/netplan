@@ -313,9 +313,7 @@ unmanaged-devices+=mac:00:11:22:33:44:55,interface-name:en1s*,''')
   ethernets:
     lo:
       vxlans:
-        names:
-        - vxlan1
-        - vxlan1005''')
+        names: [vxlan1, vxlan1005]''')
         self.assert_networkd({'lo.network': '''[Match]
 Name=lo
 
