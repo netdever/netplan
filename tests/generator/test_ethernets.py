@@ -35,13 +35,12 @@ class TestNetworkd(TestBase):
           - vxlan1005''')
 
         self.assert_networkd({'lo.network': '''[Match]
- Name=lo
+Name=lo
 
- [Network]
- LinkLocalAddressing=ipv6
- VXLAN=vxlan1
- VXLAN=vxlan1005
- '''})
+[Network]
+LinkLocalAddressing=ipv6
+VXLAN=vxlan1
+VXLAN=vxlan1005'''})
 
     def test_eth_wol(self):
         self.generate('''network:

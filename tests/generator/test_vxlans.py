@@ -37,15 +37,13 @@ Name=vxlan1005
 [Network]
 LinkLocalAddressing=ipv6
 ConfigureWithoutCarrier=yes
-Bridge=br1005
-''',
+Bridge=br1005''',
                               'vxlan1005.netdev': '''[NetDev]
 Name=vxlan1005
 Kind=vxlan
 
 [VXLAN]
-VNI=1005
-'''})
+VNI=1005'''})
 
     def test_vxlan_destinaton_port(self):
         self.generate('''network:
@@ -69,8 +67,7 @@ Kind=vxlan
 
 [VXLAN]
 VNI=1005
-DestinationPort=4789
-'''})
+DestinationPort=4789'''})
 
     def test_vxlan_empty(self):
         self.generate('''network:
@@ -85,15 +82,13 @@ Name=vxlan1005
 Kind=vxlan
 
 [VXLAN]
-VNI=1005
-''',
+VNI=1005''',
                               'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
 [Network]
 LinkLocalAddressing=ipv6
-ConfigureWithoutCarrier=yes
-'''})
+ConfigureWithoutCarrier=yes'''})
 
     def test_vxlan_params(self):
         self.generate('''network:
@@ -120,15 +115,13 @@ Kind=vxlan
 [VXLAN]
 VNI=1005
 Local=192.168.10.10
-DestinationPort=4789
-''',
+DestinationPort=4789''',
                               'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
 [Network]
 LinkLocalAddressing=ipv6
-ConfigureWithoutCarrier=yes
-'''})
+ConfigureWithoutCarrier=yes'''})
 
 
 class TestNetplanYAMLv2(TestBase):
