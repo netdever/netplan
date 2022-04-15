@@ -33,7 +33,7 @@ class TestNetworkd(TestBase):
         names:
           - vxlan1
           - vxlan1005''')
-          
+
         self.assert_networkd({'lo.network': '''[Match]
  Name=lo
 
