@@ -660,7 +660,7 @@ write_vxlans(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefin
     YAML_SCALAR_PLAIN(event, emitter, "vxlans");
     YAML_MAPPING_OPEN(event, emitter);
     YAML_SEQUENCE_OPEN(event, emitter);
-    for (unsigned i = 0; i < def->vxlans>len; ++i)
+    for (unsigned i = 0; i < def->vxlans->len; ++i)
         YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->vxlans, char*, i));
     YAML_SEQUENCE_CLOSE(event, emitter);
     YAML_MAPPING_CLOSE(event, emitter);
