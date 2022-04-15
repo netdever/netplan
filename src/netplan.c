@@ -662,6 +662,7 @@ write_vxlans(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefin
     if (def->vxlans) {
         for (unsigned i = 0; i < def->vxlans->len; ++i)
             YAML_SCALAR_QUOTED(event, emitter, g_array_index(def->vxlans, char*, i));
+    }
     YAML_SEQUENCE_CLOSE(event, emitter);
     return TRUE;
 err_path: return FALSE; // LCOV_EXCL_LINE
