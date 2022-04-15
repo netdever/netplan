@@ -53,6 +53,7 @@ VNI=1005
   vxlans:
     vxlan1005:
       vni: 1005
+      neigh-suppress: false
       parameters:
         destination-port: 4789''')
         self.assert_networkd({'vxlan1005.network': '''[Match]
@@ -76,7 +77,8 @@ DestinationPort=4789
   version: 2
   vxlans:
     vxlan1005:
-      vni: 1005''')
+      vni: 1005
+      neigh-suppress: false''')
 
         self.assert_networkd({'vxlan1005.netdev': '''[NetDev]
 Name=vxlan1005
@@ -105,6 +107,7 @@ ConfigureWithoutCarrier=yes
   vxlans:
     vxlan1005:
       vni: 1005
+      neigh-suppress: false
       parameters:
         destination-port: 4789
         local: 192.168.10.10''')

@@ -38,7 +38,6 @@ LinkLocalAddressing=ipv6
 ConfigureWithoutCarrier=yes
 ''',
                               'vrf1005.netdev': '''[NetDev]
-[NetDev]
 Name=vrf1005
 Kind=vrf
 
