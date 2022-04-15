@@ -860,6 +860,11 @@ netplan_netdef_write_network_file(
         for (unsigned i = 0; i < def->vxlans->len; ++i)
             g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlans, char*, i));
 
+    if (def->neigh_suppress) {
+        g_string_append_printf(network, "\n[Bridge]\n");
+        g_string_append_printf(network, "NeighborSuppression=%s\n", def->neigh_suppress);
+    }
+
     if (network->len > 0 || link->len > 0) {
         s = g_string_sized_new(200);
         append_match_section(def, s, TRUE);
