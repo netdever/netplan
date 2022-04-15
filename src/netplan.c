@@ -777,7 +777,7 @@ _serialize_yaml(
     }
 
     /* VXLAN options */
-    YAML_STRING(def, event, emitter, "vxlan", def->vxlan);
+    YAML_SCALAR_QUOTED(def, event, emitter, "vxlan", def->vxlan);
 
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
