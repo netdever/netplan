@@ -401,9 +401,43 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
     if (def->vxlan_params.ttl)
         g_string_append_printf(params, "\nTTL=%d", def->vxlan_params.ttl);
     if (def->vxlan_params.mac_learning)
-        g_string_append_printf(params, "\nMacLearning=%s", def->vxlan_params.mac_learning  ? "True" : "False");
+        g_string_append_printf(params, "\nMacLearning=%s", def->vxlan_params.mac_learning ? "True" : "False");
+    if (def->vxlan_params.fdb_ageing)
+        g_string_append_printf(params, "\nFDBAgeingSec=%d", def->vxlan_params.fdb_ageing);
+    if (def->vxlan_params.max_fdb_entries)
+        g_string_append_printf(params, "\nMaximumFDBEntries=%d", def->vxlan_params.max_fdb_entries);
+    if (def->vxlan_params.reduce_arp_proxy)
+        g_string_append_printf(params, "\nReduceARPProxy=%s", def->vxlan_params.reduce_arp_proxy ? "True" : "False");
+    if (def->vxlan_params.l2_miss_notification)
+        g_string_append_printf(params, "\nL2MissNotification=%s", def->vxlan_params.l2_miss_notification ? "True" : "False");
+    if (def->vxlan_params.l3_miss_notification)
+        g_string_append_printf(params, "\nL3MissNotification=%s", def->vxlan_params.l3_miss_notification ? "True" : "False");
+    if (def->vxlan_params.route_short_circuit)
+        g_string_append_printf(params, "\nRouteShortCircuit=%s", def->vxlan_params.route_short_circuit ? "True" : "False");
+    if (def->vxlan_params.udp_checksum)
+        g_string_append_printf(params, "\nUDPChecksum=%s", def->vxlan_params.udp_checksum ? "True" : "False");
+    if (def->vxlan_params.udp6_zero_checksum_tx)
+        g_string_append_printf(params, "\nUDP6ZeroChecksumTx=%s", def->vxlan_params.udp6_zero_checksum_tx ? "True" : "False");
+    if (def->vxlan_params.udp6_zero_checksum_rx)
+        g_string_append_printf(params, "\nUDP6ZeroChecksumRx=%s", def->vxlan_params.udp6_zero_checksum_rx ? "True" : "False");
+    if (def->vxlan_params.remote_checksum_tx)
+        g_string_append_printf(params, "\nRemoteChecksumTx=%s", def->vxlan_params.remote_checksum_tx ? "True" : "False");
+    if (def->vxlan_params.remote_checksum_rx)
+        g_string_append_printf(params, "\nRemoteChecksumRx=%s", def->vxlan_params.remote_checksum_rx ? "True" : "False");
+    if (def->vxlan_params.group_policy_extension)
+        g_string_append_printf(params, "\nGroupPolicyExtension=%s", def->vxlan_params.group_policy_extension ? "True" : "False");
+    if (def->vxlan_params.generic_protocol_extension)
+        g_string_append_printf(params, "\nGenericProtocolExtension=%s", def->vxlan_params.generic_protocol_extension ? "True" : "False");
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
+    if (def->vxlan_params.port_range)
+        g_string_append_printf(params, "\nPortRange=%s", def->vxlan_params.port_range);
+    if (def->vxlan_params.flow_label)
+        g_string_append_printf(params, "\nFlowLabel=%d", def->vxlan_params.flow_label);
+    if (def->vxlan_params.ip_do_not_fragment)
+        g_string_append_printf(params, "\nIPDoNotFragment=%s", def->vxlan_params.ip_do_not_fragment ? "True" : "False");
+    if (def->vxlan_params.independent)
+        g_string_append_printf(params, "\nIndependent=%s", def->vxlan_params.independent ? "True" : "False");
 
     if (params->len)
         g_string_append_printf(s, "%s\n", params->str);
