@@ -2330,7 +2330,7 @@ static const mapping_entry_handler nameservers_handlers[] = {
 };
 
 static const mapping_entry_handler vxlans_handlers[] = {
-    {"vxlans", YAML_SEQUENCE_NODE, {.generic=handle_vxlans}},
+    {"names", YAML_SEQUENCE_NODE, {.generic=handle_vxlans}},
     {NULL}
 };
 
