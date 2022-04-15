@@ -862,7 +862,7 @@ netplan_netdef_write_network_file(
 
     if (def->neigh_suppress) {
         g_string_append_printf(network, "\n[Bridge]\n");
-        g_string_append_printf(network, "NeighborSuppression=%d\n", def->neigh_suppress);
+        g_string_append_printf(network, "NeighborSuppression=%s\n", def->neigh_suppress ? "True" : "False");
     }
 
     if (network->len > 0 || link->len > 0) {
