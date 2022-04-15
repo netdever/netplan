@@ -777,9 +777,14 @@ _serialize_yaml(
     }
 
     /* VXLAN options */
-    if (def->vxlans)
-        for (unsigned i = 0; i < def->vxlans->len; ++i)
-            g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlans, char*, i));
+    if (def->vxlans) {
+        YAML_SCALAR_PLAIN(event, emitter, "vxlans");
+        YAML_SEQUENCE_OPEN(event, emitter);
+        for (unsigned i = 0; i < def->vxlans->len; ++i) {
+            YAML_SCALAR_PLAIN(event, emitter, def->vxlans);
+        }
+        YAML_SEQUENCE_CLOSE(event, emitter);
+    }
 
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
