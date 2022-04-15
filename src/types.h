@@ -229,6 +229,7 @@ struct netplan_net_definition {
     gboolean neigh_suppress;
 
     /* vrf */
+    char* vrf;
     guint vrf_id;
     NetplanNetDefinition* vrf_link;
 

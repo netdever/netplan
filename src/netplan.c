@@ -800,6 +800,9 @@ _serialize_yaml(
         YAML_UINT_DEFAULT(def, event, emitter, "id", def->vrf_id, G_MAXUINT);
     }
 
+    /* Interface VRF linkage */
+    YAML_STRING(def, event, emitter, "vrf", def->vrf);
+
     /* Tunnel settings */
     if (def->type == NETPLAN_DEF_TYPE_TUNNEL) {
         write_tunnel_settings(event, emitter, def);
@@ -874,9 +877,6 @@ _serialize_yaml(
 
     if (def->type == NETPLAN_DEF_TYPE_WIFI)
         if (!write_access_points(event, emitter, def)) goto err_path;
-
-    /* Interface VRF linkage */
-    YAML_STRING(def, event, emitter, "vrf", def->vrf);
 
     /* Handle devices in full fallback/passthrough mode (i.e. 'nm-devices') */
 only_passthrough:
