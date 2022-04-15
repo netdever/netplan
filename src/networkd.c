@@ -412,22 +412,6 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
 }
 
 static void
-write_vxlan_network(const NetplanNetDefinition* def, GString* s)
-{
-    GString* params = NULL;
-
-    params = g_string_sized_new(200);
-
-    if (def->vxlan_network.bridge)
-        g_string_append_printf(params, "\nBridge=%s", def->vxlan_network.bridge);
-
-    if (params->len)
-        g_string_append_printf(s, "%s\n", params->str);
-
-    g_string_free(params, TRUE);
-}
-
-static void
 write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const char* path)
 {
     GString* s = NULL;
@@ -659,10 +643,6 @@ netplan_netdef_write_network_file(
     gboolean is_optional = def->optional;
 
     SET_OPT_OUT_PTR(has_been_written, FALSE);
-
-    if (def->type == NETPLAN_DEF_TYPE_VXLAN) {
-        write_vxlan_network(def, s);
-    }
 
     if (def->type == NETPLAN_DEF_TYPE_VLAN && def->sriov_vlan_filter) {
         g_debug("%s is defined as a hardware SR-IOV filtered VLAN, postponing creation", def->id);

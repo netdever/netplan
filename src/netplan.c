@@ -230,20 +230,6 @@ err_path: return FALSE; // LCOV_EXCL_LINE
 }
 
 static gboolean
-write_vxlan_network(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def)
-{
-    if (DIRTY(def, def->vxlan_network)
-        || def->vxlan_network.bridge) {
-        YAML_SCALAR_PLAIN(event, emitter, "network");
-        YAML_MAPPING_OPEN(event, emitter);
-        YAML_STRING(def, event, emitter, "bridge", def->vxlan_network.bridge);
-        YAML_MAPPING_CLOSE(event, emitter);
-    }
-    return TRUE;
-err_path: return FALSE; // LCOV_EXCL_LINE
-}
-
-static gboolean
 write_bridge_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def, const GArray *interfaces)
 {
     if (def->custom_bridging || DIRTY_COMPLEX(def, def->bridge_params)) {
@@ -771,7 +757,6 @@ _serialize_yaml(
         }
         write_bond_params(event, emitter, def);
         write_vxlan_params(event, emitter, def);
-        write_vxlan_network(event, emitter, def);
         write_bridge_params(event, emitter, def, tmp_arr);
         g_array_free(tmp_arr, TRUE);
     }
