@@ -59,13 +59,7 @@ Name=vxlan1005
 LinkLocalAddressing=ipv6
 ConfigureWithoutCarrier=yes
 ''',
-                              'vxlan1005.netdev': '''[NetDev]
-Name=vxlan1005
-Kind=vxlan
-
-[VXLAN]
-VNI=1005
-DestinationPort=4789'''})
+                              'vxlan1005.netdev': '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005'})
 
     def test_vxlan_empty(self):
         self.generate('''network:
@@ -75,12 +69,7 @@ DestinationPort=4789'''})
       vni: 1005
       neigh-suppress: false''')
 
-        self.assert_networkd({'vxlan1005.netdev': '''[NetDev]
-Name=vxlan1005
-Kind=vxlan
-
-[VXLAN]
-VNI=1005''',
+        self.assert_networkd({'vxlan1005.netdev': '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005',
                               'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
@@ -106,15 +95,7 @@ ConfigureWithoutCarrier=yes
         destination-port: 4789
         local: 192.168.10.10''')
 
-        self.assert_networkd({'vxlan1005.netdev': '''[NetDev]
-[NetDev]
-Name=vxlan1005
-Kind=vxlan
-
-[VXLAN]
-VNI=1005
-Local=192.168.10.10
-DestinationPort=4789''',
+        self.assert_networkd({'vxlan1005.netdev': '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005\nLocal=192.168.10.10\nDestinationPort=4789',
                               'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
