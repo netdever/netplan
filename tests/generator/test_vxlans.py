@@ -30,7 +30,6 @@ class TestNetworkd(TestBase):
     vxlan1005:
       vni: 1005
       bridge: br1005''')
-
         self.assert_networkd({'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
@@ -43,7 +42,8 @@ Name=vxlan1005
 Kind=vxlan
 
 [VXLAN]
-VNI=1005'''})
+VNI=1005
+DestinationPort=4789'''})
 
     def test_vxlan_destinaton_port(self):
         self.generate('''network:
@@ -51,9 +51,7 @@ VNI=1005'''})
   vxlans:
     vxlan1005:
       vni: 1005
-      neigh-suppress: false
-      parameters:
-        destination-port: 4789''')
+      neigh-suppress: false''')
         self.assert_networkd({'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
@@ -82,8 +80,7 @@ Name=vxlan1005
 Kind=vxlan
 
 [VXLAN]
-VNI=1005
-''',
+VNI=1005''',
                               'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
