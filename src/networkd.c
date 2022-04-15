@@ -865,6 +865,10 @@ netplan_netdef_write_network_file(
         g_string_append_printf(network, "NeighborSuppression=%s\n", def->neigh_suppress ? "True" : "False");
     }
 
+    /* VRF linkage */
+    if (def->vrf)
+        g_string_append_printf(network, "VRF=%s\n", def->vrf);
+
     if (network->len > 0 || link->len > 0) {
         s = g_string_sized_new(200);
         append_match_section(def, s, TRUE);
@@ -883,10 +887,6 @@ netplan_netdef_write_network_file(
         g_string_free_to_file(s, rootdir, path, ".network");
         umask(orig_umask);
     }
-
-    /* VRF linkage */
-    if (def->vrf)
-        g_string_append_printf(network, "VRF=%s\n", def->vrf);
 
     SET_OPT_OUT_PTR(has_been_written, TRUE);
     return TRUE;
