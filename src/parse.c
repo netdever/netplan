@@ -2380,7 +2380,7 @@ static const mapping_entry_handler dhcp6_overrides_handlers[] = {
     {"generic-segmentation-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(generic_segmentation_offload)}, \
     {"generic-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(generic_receive_offload)}, \
     {"large-receive-offload", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(large_receive_offload)}, \
-    {"vxlan", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan)}
+    {"vxlans", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlans)}
 
 /* Handlers for VXLANs */
 #define VXLAN_LINK_HANDLERS \
