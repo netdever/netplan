@@ -401,7 +401,7 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
     if (def->vxlan_params.ttl)
         g_string_append_printf(params, "\nTTL=%d", def->vxlan_params.ttl);
     if (def->vxlan_params.mac_learning)
-        g_string_append_printf(params, "\nMacLearning=%d", def->vxlan_params.mac_learning  ? "True" : "False");
+        g_string_append_printf(params, "\nMacLearning=%s", def->vxlan_params.mac_learning  ? "True" : "False");
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
 
