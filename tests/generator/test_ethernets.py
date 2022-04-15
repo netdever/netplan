@@ -28,19 +28,14 @@ class TestNetworkd(TestBase):
   version: 2
   ethernets:
     lo:
-      dhcp4: no
-      vxlans:
-        names:
-          - vxlan1
-          - vxlan1005''')
+      dhcp4: no''')
 
         self.assert_networkd({'lo.network': '''[Match]
 Name=lo
 
 [Network]
 LinkLocalAddressing=ipv6
-VXLAN=vxlan1
-VXLAN=vxlan1005'''})
+'''})
 
     def test_eth_wol(self):
         self.generate('''network:

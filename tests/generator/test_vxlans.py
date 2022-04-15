@@ -82,13 +82,15 @@ Name=vxlan1005
 Kind=vxlan
 
 [VXLAN]
-VNI=1005''',
+VNI=1005
+''',
                               'vxlan1005.network': '''[Match]
 Name=vxlan1005
 
 [Network]
 LinkLocalAddressing=ipv6
-ConfigureWithoutCarrier=yes'''})
+ConfigureWithoutCarrier=yes
+'''})
 
     def test_vxlan_params(self):
         self.generate('''network:
