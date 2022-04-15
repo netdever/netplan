@@ -2329,6 +2329,11 @@ static const mapping_entry_handler nameservers_handlers[] = {
     {NULL}
 };
 
+static const mapping_entry_handler vxlans_handlers[] = {
+    {"vxlans", YAML_SEQUENCE_NODE, {.generic=handle_vxlans}},
+    {NULL}
+};
+
 /* Handlers for DHCP overrides. */
 #define COMMON_DHCP_OVERRIDES_HANDLERS(overrides)                                                           \
     {"hostname", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(overrides.hostname)},             \
@@ -2455,11 +2460,6 @@ static const mapping_entry_handler vxlan_def_handlers[] = {
     VXLAN_LINK_HANDLERS,
     {"id", YAML_SCALAR_NODE, {.generic=handle_netdef_guint}, netdef_offset(vxlan_id)},
     {"parameters", YAML_MAPPING_NODE, {.map={.custom=handle_vxlan_params}}},
-    {NULL}
-};
-
-static const mapping_entry_handler vxlans_handlers[] = {
-    {"vxlans", YAML_SEQUENCE_NODE, {.generic=handle_vxlans}},
     {NULL}
 };
 
