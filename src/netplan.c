@@ -654,20 +654,6 @@ write_openvswitch(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanOVS
 err_path: return FALSE; // LCOV_EXCL_LINE
 }
 
-static gboolean
-write_vxlans(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNetDefinition* def)
-{
-    YAML_SCALAR_PLAIN(event, emitter, "vxlans");
-    YAML_SEQUENCE_OPEN(event, emitter);
-    if (def->vxlans) {
-        for (unsigned i = 0; i < def->vxlans->len; ++i)
-            YAML_SCALAR_QUOTED(event, emitter, g_array_index(def->vxlans, char*, i));
-    }
-    YAML_SEQUENCE_CLOSE(event, emitter);
-    return TRUE;
-err_path: return FALSE; // LCOV_EXCL_LINE
-}
-
 static void
 _serialize_yaml(
         const NetplanState* np_state,
@@ -792,7 +778,8 @@ _serialize_yaml(
 
     /* VXLAN options */
     if (def->vxlans)
-        write_vxlans(event, emitter, def);
+        for (unsigned i = 0; i < def->vxlans->len; ++i)
+            g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlans, char*, i));
 
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
