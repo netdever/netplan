@@ -884,6 +884,10 @@ netplan_netdef_write_network_file(
         umask(orig_umask);
     }
 
+    /* VRF linkage */
+    if (def->vrf)
+        g_string_append_printf(network, "VRF=%s\n", def->vrf);
+
     SET_OPT_OUT_PTR(has_been_written, TRUE);
     return TRUE;
 }

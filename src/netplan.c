@@ -875,6 +875,9 @@ _serialize_yaml(
     if (def->type == NETPLAN_DEF_TYPE_WIFI)
         if (!write_access_points(event, emitter, def)) goto err_path;
 
+    /* Interface VRF linkage */
+    YAML_STRING(def, event, emitter, "vrf", def->vrf);
+
     /* Handle devices in full fallback/passthrough mode (i.e. 'nm-devices') */
 only_passthrough:
     if (!write_backend_settings(event, emitter, def->backend_settings)) goto err_path;
