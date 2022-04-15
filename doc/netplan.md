@@ -520,6 +520,15 @@ similar to ``gateway*``, and ``search:`` is a list of search domains.
 
 :   Configure policy routing for the device; see the ``Routing`` section below.
 
+``vrf`` (scalar)
+
+:   VRF interface to add the link to.
+
+``vxlans`` (scalar)
+
+    ``names`` (sequence of scalars)
+    :   The names of VXLANs be created on the link.
+
 ## DHCP Overrides
 Several DHCP behavior overrides are available. Most currently only have any
 effect when using the ``networkd`` backend, with the exception of ``use-routes``
