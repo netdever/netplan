@@ -2407,7 +2407,8 @@ static const mapping_entry_handler dhcp6_overrides_handlers[] = {
 
 /* Handlers for VXLANs */
 #define VXLAN_LINK_HANDLERS \
-    {"bridge", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan_bridge)}
+    {"bridge", YAML_SCALAR_NODE, {.generic=handle_netdef_str}, netdef_offset(vxlan_bridge)}, \
+    {"neigh-suppress", YAML_SCALAR_NODE, {.generic=handle_netdef_bool}, netdef_offset(neigh_suppress)}
 
 static const mapping_entry_handler ethernet_def_handlers[] = {
     COMMON_LINK_HANDLERS,
