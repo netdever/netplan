@@ -307,25 +307,24 @@ UseMTU=true
 # devices managed by networkd
 unmanaged-devices+=mac:00:11:22:33:44:55,interface-name:en1s*,''')
 
-    def test_set_vxlans(self):
-        self.generate('''network:
-  version: 2
-  ethernets:
-    lo:
-      dhcp4: no
-      vxlans:
-        names:
-        - vxlan1
-        - vxlan1005''')
-        self.assert_networkd({'lo.network': '''[Match]
-Name=lo
-
-[Network]
-LinkLocalAddressing=ipv6
-VXLAN=vxlan1
-VXLAN=vxlan1005
-'''})
-        self.assert_networkd_udev(None)
+#    def test_set_vxlans(self):
+#        self.generate('''network:
+#  version: 2
+#  ethernets:
+#    lo:
+#      dhcp4: no
+#      vxlans:
+#        names:
+#        - vxlan1
+#        - vxlan1005''')
+#        self.assert_networkd({'lo.network': '''[Match]
+#Name=lo
+#
+#[Network]
+#LinkLocalAddressing=ipv6
+#VXLAN=vxlan1
+#VXLAN=vxlan1005
+#'''})
 
 
 class TestNetworkManager(TestBase):
