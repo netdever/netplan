@@ -896,7 +896,7 @@ netplan_netdef_write_network_file(
 
     /* VXLAN options */
     if (def->vxlans) {
-        for (unsigned i = 0; i < def->vxlans->len-1; ++i)
+        for (unsigned i = 0; i < def->vxlans->len; i++)
             g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlans, char*, i));
     }
 
