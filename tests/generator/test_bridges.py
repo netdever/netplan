@@ -52,9 +52,14 @@ UseMTU=true
     def test_bridge_set_vrf(self):
         self.generate('''network:
   version: 2
+  vrfs:
+    vrf1005:
+      table: 1005
+      interfaces:
+      - br0
   bridges:
     br0:
-      vrf: vrf1005''')
+      interfaces: []''')
 
         self.assert_networkd({'br0.network': '''[Match]
 Name=br0
