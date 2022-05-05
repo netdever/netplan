@@ -437,7 +437,7 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
             if (i == 0)
                 g_string_append_printf(params, "-");
             else if (i > 0)
-                break
+                break;
         }
     }
     if (def->vxlan_params.flow_label)
