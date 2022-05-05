@@ -42,7 +42,7 @@ class TestNetworkd(TestBase):
           'br1005.network':
           '[Match]\nName=br1005\n\n[Network]\nLinkLocalAddressing=ipv6\nConfigureWithoutCarrier=yes\n',
           'br1005.netdev':
-          '[NetDev]\nName=br1005\nKind=bridge'})
+          '[NetDev]\nName=br1005\nKind=bridge\n'})
 
     def test_vxlan_destinaton_port(self):
         self.generate('''network:
