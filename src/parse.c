@@ -1944,23 +1944,16 @@ handle_bond_primary_slave(NetplanParser* npp, yaml_node_t* node, const void* dat
 static gboolean
 handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
 {
-    /* all entries must refer to already defined IDs */
     for (yaml_node_item_t *i = node->data.sequence.items.start; i < node->data.sequence.items.top; i++) {
         yaml_node_t *entry = yaml_document_get_node(&npp->doc, *i);
-        NetplanNetDefinition *component;
-
         assert_type(npp, entry, YAML_SCALAR_NODE);
-        component = g_hash_table_lookup(npp->parsed_defs, scalar(entry));
-        return yaml_error(npp, node, error, "component '%s'", component);
-        if (!component) {
-            add_missing_node(npp, entry);
-        } else {
-            if (!component->vxlans)
-                return yaml_error(npp, node, error, "%s: vxlan '%s' is not defined",
-                                  npp->current.netdef->vxlans, scalar(entry));
-        }
+
+        if (!npp->current.netdef->vxlans)
+            npp->current.netdef->vxlans = g_array_new(FALSE, FALSE, sizeof(char*));
+        char* s = g_strdup(scalar(entry));
+        g_array_append_val(npp->current.netdef->vxlans, s);
     }
-    
+
     mark_data_as_dirty(npp, &npp->current.netdef->vxlans);
     return TRUE;
 }
