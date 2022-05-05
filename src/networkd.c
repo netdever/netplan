@@ -431,7 +431,7 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
     if (def->vxlan_params.source_port_range)
-        g_string_append_printf(params, "\nPortRange=%s", def->vxlan_params.source_port_range);
+        g_string_append_printf(params, "\nPortRange=%s", def->vxlan_params.source_port_range[0]);
     if (def->vxlan_params.flow_label)
         g_string_append_printf(params, "\nFlowLabel=%d", def->vxlan_params.flow_label);
     if (def->vxlan_params.ip_do_not_fragment)
