@@ -336,6 +336,13 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
             return yaml_error(npp, node, error, "%s: invalid ttl '%u' (allowed values are 0 to 255)", nd->id, nd->vxlan_params.ttl);
         if (nd->vxlan_params.flow_label > 1048575)
             return yaml_error(npp, node, error, "%s: invalid flow-label '%u' (allowed values are 0 to 1048575)", nd->id, nd->vxlan_params.flow_label);
+        if (nd->vxlan_params.source_port_range->len != 2) {
+            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (allowed values are 0 to 1048575)", nd->id, vxlan_params.source_port_range);
+        } elif (nd->vxlan_params.source_port_range[0] > nd->vxlan_params.source_port_range[1]) {
+            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (UPPER must be greater than or equal to LOWER)", nd->id, vxlan_params.source_port_range);
+        } elif (nd->vxlan_params.source_port_range[0] < 0 || nd->vxlan_params.source_port_range[1] > 65535) {
+            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (allowed values are 0 to 65535)", nd->id, vxlan_params.source_port_range);
+        }
     }
 
     if (nd->type == NETPLAN_DEF_TYPE_VRF) {
