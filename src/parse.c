@@ -2021,6 +2021,8 @@ handle_vxlan_source_port(NetplanParser* npp, yaml_node_t* node, const void* data
     for (yaml_node_item_t *i = node->data.sequence.items.start; i < node->data.sequence.items.top; i++) {
         yaml_node_t *entry = yaml_document_get_node(&npp->doc, *i);
         assert_type(npp, entry, YAML_SCALAR_NODE);
+        char* s = g_strdup(scalar(entry));
+        g_array_append_val(npp->current.netdef->vxlan_params.source_port_range, s);
     }
 
     mark_data_as_dirty(npp, &npp->current.netdef->vxlan_params.source_port_range);
