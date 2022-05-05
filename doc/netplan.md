@@ -1418,7 +1418,7 @@ Example:
      ``tos`` (scalar)
      :    The Type Of Service byte value for a vxlan interface.
 
-     ``ttl`` (scalar)
+     ``ttl`` (scalar) – since **0.105**
      :    A fixed Time To Live N on Virtual eXtensible Local Area Network packets.
           Takes a number in the range 0…255.
 
