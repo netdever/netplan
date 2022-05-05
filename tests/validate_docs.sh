@@ -26,8 +26,8 @@ for term in $(sed -n 's/[ ]\+{"\([a-z0-9-]\+\)", YAML_[A-Z]\+_NODE.*/\1/p' src/p
         continue
     fi
 
-    # 3. we give a pass to network, version and vrf
-    if ($term == "network" || $term == "version" || $term == "vrf"); then
+    # 3. we give a pass to network and version
+    if [[ $term = "network" ]] || [[ $term = "version" ]]; then
         continue
     fi
 
@@ -38,6 +38,11 @@ for term in $(sed -n 's/[ ]\+{"\([a-z0-9-]\+\)", YAML_[A-Z]\+_NODE.*/\1/p' src/p
 
     # 5. gratuit_i_ous arp gets a special note
     if [[ $term = "gratuitious-arp" ]]; then
+        continue
+    fi
+
+    # 6. give a pass to vrf since it is a virtual device
+    if [[ $term = "vrf" ]]; then
         continue
     fi
 
