@@ -1948,9 +1948,10 @@ handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** err
         yaml_node_t *entry = yaml_document_get_node(&npp->doc, *i);
         assert_type(npp, entry, YAML_SCALAR_NODE);
 
-        if (!npp->current.netdef->vxlans)
+        if (!npp->current.netdef->vxlans) {
             npp->current.netdef->vxlans = g_array_new(FALSE, FALSE, sizeof(char*));
             break;
+        }
         char* s = g_strdup(scalar(entry));
         g_array_append_val(npp->current.netdef->vxlans, s);
     }
