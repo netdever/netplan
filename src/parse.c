@@ -1955,7 +1955,7 @@ handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** err
         if (!component) {
             add_missing_node(npp, entry);
         } else {
-            if (!component->vxlans->name)
+            if (!component->vxlans)
                 return yaml_error(npp, node, error, "%s: vxlan '%s' is not defined",
                                   npp->current.netdef->vxlans, scalar(entry));
         }
