@@ -52,16 +52,16 @@ UseMTU=true
     def test_bridge_set_vrf(self):
         self.generate('''network:
   version: 2
-  vrfs:
-    vrf1005:
-      table: 1005
-      interfaces: [ br0 ]
   ethernets:
     eno1:
       addresses: [ 192.168.0.10/24 ]
   bridges:
     br0:
-      interfaces: [ eno1 ]''')
+      interfaces: [ eno1 ]
+  vrfs:
+    vrf1005:
+      table: 1005
+      interfaces: [ br0 ]''')
 
         self.assert_networkd({'br0.network': '''[Match]
 Name=br0
