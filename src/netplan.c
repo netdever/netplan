@@ -258,9 +258,10 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
             GArray* arr = def->vxlan_params.source_port_range;
             YAML_SCALAR_PLAIN(event, emitter, "source-port-range");
             YAML_SEQUENCE_OPEN(event, emitter);
-            if (arr)
+            if (arr) {
                 for (unsigned i = 0; i < arr->len; ++i)
                     YAML_SCALAR_PLAIN(event, emitter, g_array_index(arr, char*, i));
+            }
             YAML_SEQUENCE_CLOSE(event, emitter);
         }
         YAML_MAPPING_CLOSE(event, emitter);
@@ -796,11 +797,11 @@ _serialize_yaml(
             YAML_SEQUENCE_CLOSE(event, emitter);
         }
         write_bond_params(event, emitter, def);
-        write_vxlan_params(event, emitter, def);
         write_bridge_params(event, emitter, def, tmp_arr);
         g_array_free(tmp_arr, TRUE);
     }
 
+    write_vxlan_params(event, emitter, def);
     write_routes(event, emitter, def);
 
     /* VLAN settings */
