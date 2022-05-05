@@ -774,12 +774,12 @@ _serialize_yaml(
                    def->sriov_delay_virtual_functions_rebind);
 
     /* Search interfaces */
-    if (def->type == NETPLAN_DEF_TYPE_BRIDGE || def->type == NETPLAN_DEF_TYPE_BOND) {
+    if (def->type == NETPLAN_DEF_TYPE_BRIDGE || def->type == NETPLAN_DEF_TYPE_BOND || def->type == NETPLAN_DEF_TYPE_VRF) {
         tmp_arr = g_array_new(FALSE, FALSE, sizeof(NetplanNetDefinition*));
         g_hash_table_iter_init(&iter, np_state->netdefs);
         while (g_hash_table_iter_next (&iter, &key, &value)) {
             NetplanNetDefinition *nd = (NetplanNetDefinition *) value;
-            if (g_strcmp0(nd->bond, def->id) == 0 || g_strcmp0(nd->bridge, def->id) == 0)
+            if (g_strcmp0(nd->bond, def->id) == 0 || g_strcmp0(nd->bridge, def->id) == 0 || g_strcmp0(nd->vrf, def->id) == 0)
                 g_array_append_val(tmp_arr, nd);
         }
         if (tmp_arr->len > 0) {
@@ -822,14 +822,8 @@ _serialize_yaml(
     }
 
     /* VRF settings */
-    if (def->type == NETPLAN_DEF_TYPE_VRF) {
+    if (def->type == NETPLAN_DEF_TYPE_VRF)
         YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
-        YAML_SCALAR_PLAIN(event, emitter, "interfaces");
-        YAML_SEQUENCE_OPEN(event, emitter);
-        for (unsigned i = 0; i < def->interfaces->len; ++i)
-            YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->interfaces, char*, i));
-        YAML_SEQUENCE_CLOSE(event, emitter);
-    }
 
     /* Tunnel settings */
     if (def->type == NETPLAN_DEF_TYPE_TUNNEL) {
