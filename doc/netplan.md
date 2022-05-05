@@ -1468,10 +1468,10 @@ Example:
      :    Configures the default destination UDP port. If the destination port is not specified
           then Linux kernel default will be used. Set to 4789 to get the IANA assigned value.
 
-     ``port-range`` (scalar)
+     ``source-port-range`` (sequence of scalars)
      :    Configures the source port range for the VXLAN. The kernel assigns the source UDP port
           based on the flow to help the receiver to do load balancing. When this option is not set,
-          the normal range of local UDP ports is used.
+          the normal range of local UDP ports is used. Uses the form [LOWER, UPPER].
 
      ``flow-label`` (scalar)
      :    Specifies the flow label to use in outgoing packets. The valid range is 0-1048575.
@@ -1479,11 +1479,6 @@ Example:
      ``ip-do-not-fragment`` (scalar)
      :    Allows setting the IPv4 Do not Fragment (DF) bit in outgoing packets. Takes a boolean value.
           When unset, the kernel's default will be used.
-
-     ``independent`` (scalar)
-     :    Takes a boolean. When true, the vxlan interface is created without any underlying network interface.
-          Defaults to false, which means that a .network file that requests this VXLAN interface using VXLAN=
-          is required for the VXLAN to be created.
 
 ## Properties for device type ``vrfs:``
 

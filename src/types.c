@@ -320,10 +320,9 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     netdef->vxlan_params.group_policy_extension = FALSE;
     netdef->vxlan_params.generic_protocol_extension = FALSE;
     netdef->vxlan_params.destination_port = 0;
-    FREE_AND_NULLIFY(netdef->vxlan_params.port_range);
+    FREE_AND_NULLIFY(netdef->vxlan_params.source_port_range);
     netdef->vxlan_params.flow_label = 0;
     netdef->vxlan_params.ip_do_not_fragment = FALSE;
-    netdef->vxlan_params.independent = FALSE;
     netdef->vrf = NULL;
     netdef->neigh_suppress = FALSE;
     free_garray_with_destructor(&netdef->vxlans, g_free);
