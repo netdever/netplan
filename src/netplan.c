@@ -255,7 +255,7 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
         YAML_SCALAR_PLAIN(event, emitter, "source-port-range");
         YAML_SEQUENCE_OPEN(event, emitter);
         for (unsigned i = 0; i < def->vxlan_params.source_port_range->len; ++i)
-            YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->vxlan_params.source_port_range, guint*, i));
+            YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->vxlan_params.source_port_range, char*, i));
         YAML_SEQUENCE_CLOSE(event, emitter);
         YAML_UINT_0(def, event, emitter, "flow-label", def->vxlan_params.flow_label);
         YAML_BOOL_FALSE(def, event, emitter, "ip-do-not-fragment", def->vxlan_params.ip_do_not_fragment);
