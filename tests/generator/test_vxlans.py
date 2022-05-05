@@ -40,7 +40,7 @@ class TestNetworkd(TestBase):
           'vxlan1005.netdev':
           '[NetDev]\nName=vxlan1005\nKind=vxlan\n\n[VXLAN]\nVNI=1005',
           'br1005.network':
-          '[Match]\nName=br1005\n\n[Network]\nLinkLocalAddressing=no\nConfigureWithoutCarrier=yes',
+          '[Match]\nName=br1005\n\n[Network]\nLinkLocalAddressing=ipv6\nConfigureWithoutCarrier=yes',
           'br1005.netdev':
           '[NetDev]\nName=br1005\nKind=bridge'})
 
