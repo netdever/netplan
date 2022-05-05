@@ -362,7 +362,7 @@ struct netplan_net_definition {
         gboolean group_policy_extension;
         gboolean generic_protocol_extension;
         guint destination_port;
-        char* source_port_range;
+        GArray* source_port_range;
         guint flow_label;
         gboolean ip_do_not_fragment;
     } vxlan_params;
