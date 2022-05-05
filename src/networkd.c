@@ -431,11 +431,13 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
     if (def->vxlan_params.source_port_range) {
-        g_string_append_printf(params, "\nPortRange=%d", def->vxlan_params.source_port_range->len);
+        g_string_append_printf(params, "\nPortRange=");
         for (unsigned i = 0; i < def->vxlan_params.source_port_range->len; ++i) {
-            if (i > 0)
-                g_string_append_printf(params, " ");
             g_string_append_printf(params, "%s", g_array_index(def->vxlan_params.source_port_range, char*, i));
+            if (i == 0)
+                g_string_append_printf(params, "-");
+            else if (i > 0)
+                break
         }
     }
     if (def->vxlan_params.flow_label)
