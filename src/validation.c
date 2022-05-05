@@ -338,8 +338,8 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
             return yaml_error(npp, node, error, "%s: invalid flow-label '%u' (allowed values are 0 to 1048575)", nd->id, nd->vxlan_params.flow_label);
         if (nd->vxlan_params.source_port_range) {
             for (guint i = 0; i < nd->vxlan_params.source_port_range->len; i++) {
-                char lower = g_array_index (nd->vxlan_params.source_port_range, char*, i);
-                char upper = g_array_index (nd->vxlan_params.source_port_range, char*, ++i);
+                int lower = (intptr_t) g_array_index (nd->vxlan_params.source_port_range, char*, i);
+                int upper = (intptr_t) g_array_index (nd->vxlan_params.source_port_range, char*, ++i);
                 return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' %s %s", nd->id, nd->vxlan_params.flow_label, lower, upper);
             }
         }
