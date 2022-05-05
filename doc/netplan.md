@@ -524,10 +524,9 @@ similar to ``gateway*``, and ``search:`` is a list of search domains.
 
 :   VRF interface to add the link to.
 
-``vxlans`` (scalar)
+``vxlans`` (sequence of scalars)
 
-    ``names`` (sequence of scalars)
-    :   The names of VXLANs be created on the link.
+:   The VXLAN interfaces be created on the link.
 
 ``neigh-suppress`` (scalar)
 
