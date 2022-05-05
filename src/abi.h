@@ -330,14 +330,11 @@ struct netplan_net_definition {
 
     /* vrf */
     /* netplan-feature: vrf */
-    char* vrf;
     guint vrf_table;
-    NetplanNetDefinition* vrf_link;
 
     /* vxlan */
     /* netplan-feature: vxlan */
     guint vxlan_vni;
-    NetplanNetDefinition* vxlan_link;
     GArray* vxlans;
     gboolean neigh_suppress;
 
