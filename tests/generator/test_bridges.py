@@ -75,6 +75,28 @@ ConfigureWithoutCarrier=yes
                               'br0.netdev': '''[NetDev]
 Name=br0
 Kind=bridge
+''',
+                              'vrf1005.network': '''[Match]
+Name=vrf1005
+
+[Network]
+LinkLocalAddressing=ipv6
+ConfigureWithoutCarrier=yes
+''',
+                              'vrf1005.netdev': '''[NetDev]
+Name=vrf1005
+Kind=vrf
+
+[VRF]
+Table=1005
+''',
+                              'eno1.network': '''[Match]
+Name=eno1
+
+[Network]
+LinkLocalAddressing=no
+IPv6AcceptRA=no
+Bridge=br0
 '''})
 
     def test_bridge_dhcp6_no_accept_ra(self):
