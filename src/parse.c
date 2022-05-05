@@ -2012,11 +2012,11 @@ handle_vrf_interfaces(NetplanParser* npp, yaml_node_t* node, const void* data, G
 }
 
 static gboolean
-handle_vxlan_source_port(NetplanParser* npp, yaml_node_t* node, const void* _, GError** error)
+handle_vxlan_source_port(NetplanParser* npp, yaml_node_t* node, const void* data, GError** error)
 {
-    //if (!npp->current.netdef->vxlan_params.source_port_range) {
-    //    npp->current.netdef->vxlan_params.source_port_range = g_array_new(FALSE, FALSE, sizeof(char *));
-    //}
+    if (!npp->current.netdef->vxlan_params.source_port_range) {
+        npp->current.netdef->vxlan_params.source_port_range = g_array_new(FALSE, FALSE, sizeof(char *));
+    }
 
     for (yaml_node_item_t *i = node->data.sequence.items.start; i < node->data.sequence.items.top; i++) {
         yaml_node_t *entry = yaml_document_get_node(&npp->doc, *i);
