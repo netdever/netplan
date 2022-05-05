@@ -96,7 +96,6 @@ Name=eno1
 [Network]
 LinkLocalAddressing=no
 Address=192.168.0.10/24
-IPv6AcceptRA=no
 Bridge=br0
 '''})
 
