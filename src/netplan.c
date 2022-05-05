@@ -797,11 +797,11 @@ _serialize_yaml(
             YAML_SEQUENCE_CLOSE(event, emitter);
         }
         write_bond_params(event, emitter, def);
-        write_vxlan_params(event, emitter, def);
         write_bridge_params(event, emitter, def, tmp_arr);
         g_array_free(tmp_arr, TRUE);
     }
 
+    write_vxlan_params(event, emitter, def);
     write_routes(event, emitter, def);
 
     /* VLAN settings */

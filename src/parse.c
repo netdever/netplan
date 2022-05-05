@@ -1950,8 +1950,6 @@ handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** err
 
         if (!npp->current.netdef->vxlans)
             npp->current.netdef->vxlans = g_array_new(FALSE, FALSE, sizeof(char*));
-        char* s = g_strdup(scalar(entry));
-        g_array_append_val(npp->current.netdef->vxlans, s);
     }
 
     mark_data_as_dirty(npp, &npp->current.netdef->vxlans);
