@@ -339,8 +339,8 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
         if (nd->vxlan_params.source_port_range->len != 2)
             return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (must be [LOWER, UPPER])", nd->id, nd->vxlan_params.source_port_range);
         for (guint i = 0; i < nd->vxlan_params.source_port_range->len; i++) {
-            guint lower = (int)g_array_index (nd->vxlan_params.source_port_range, char*, i);
-            guint upper = (int)g_array_index (nd->vxlan_params.source_port_range, char*, i++);
+            unsigned int lower = (uintptr_t)g_array_index (nd->vxlan_params.source_port_range, char*, i);
+            unsigned int upper = (uintptr_t)g_array_index (nd->vxlan_params.source_port_range, char*, i++);
             if (lower > upper)
                 return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (UPPER must be greater than or equal to LOWER)", nd->id, nd->vxlan_params.source_port_range);
             elif (lower < 0 || upper > 65535) {
