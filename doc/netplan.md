@@ -1575,7 +1575,18 @@ This is a complex example which shows most available features:
       # if specified, can only realistically have that value, as networkd cannot
       # render wifi/3G.
       renderer: NetworkManager
+      vrfs:
+        mgmt-vrf:
+          table: 10
+          interfaces:
+            - id1
       ethernets:
+        lo:
+          addresses:
+            - 172.16.20.20/32
+          link-local: []
+          vxlans:
+            - vxlan20
         # opaque ID for physical interfaces, only referred to by other stanzas
         id0:
           match:
@@ -1608,6 +1619,22 @@ This is a complex example which shows most available features:
               from: 192.168.14.3/24
               table: 70
               priority: 50
+        id1:
+          match:
+            macaddress: 00:11:22:33:44:56
+          wakeonlan: true
+          dhcp4: true
+          addresses:
+            - 192.168.24.2/24
+          nameservers:
+            search: [foo.local, bar.local]
+            addresses: [8.8.8.8]
+          routes:
+            - to: 0.0.0.0/0
+              via: 192.168.24.254
+              table: 10
+              on-link: true
+              metric: 100
           # only networkd can render on-link routes and routing policies
           renderer: networkd
         lom:
@@ -1646,6 +1673,19 @@ This is a complex example which shows most available features:
           # IDs of the components; switchports expands into multiple interfaces
           interfaces: [wlp1s0, switchports]
           dhcp4: true
+        br20:
+          interfaces: [vxlan20]
+      vxlans:
+        vxlan20:
+          vni: 20
+          mtu: 8950
+          accept-ra: no
+          neigh-suppress: true
+          link-local: []
+          parameters:
+            mac-learning: false
+            destination-port: 4789
+            local: 172.16.20.20
 
 <!--- vim: ft=markdown
 -->
