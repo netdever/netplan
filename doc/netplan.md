@@ -72,7 +72,7 @@ Physical devices
 
 Virtual devices
 
-:  (Examples: veth, bridge, bond) These are fully under the control of the
+:  (Examples: veth, bridge, bond, vrf) These are fully under the control of the
    config file(s) and the network stack. I. e. these devices are being created
    instead of matched. Thus ``match:`` and ``set-name:`` are not applicable for
    these, and the ID field is the name of the created virtual device.
