@@ -1951,10 +1951,11 @@ handle_vxlans(NetplanParser* npp, yaml_node_t* node, const void* _, GError** err
 
         assert_type(npp, entry, YAML_SCALAR_NODE);
         component = g_hash_table_lookup(npp->parsed_defs, scalar(entry));
+        return yaml_error(npp, node, error, "component '%s'", component);
         if (!component) {
             add_missing_node(npp, entry);
         } else {
-            if (!component->vxlans->vxlan)
+            if (!component->vxlans->name)
                 return yaml_error(npp, node, error, "%s: vxlan '%s' is not defined",
                                   npp->current.netdef->vxlans, scalar(entry));
         }
