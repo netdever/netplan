@@ -431,7 +431,7 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
     if (def->vxlan_params.source_port_range) {
-        g_string_append_printf(params, "\nPortRange=");
+        g_string_append_printf(params, "\nPortRange=%d", def->vxlan_params.source_port_range->len);
         for (unsigned i = 0; i < def->vxlan_params.source_port_range->len; ++i) {
             if (i > 0)
                 g_string_append_printf(params, " ");
