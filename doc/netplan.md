@@ -1478,10 +1478,6 @@ Example:
 
 ## Properties for device type ``vrfs:``
 
-``vrf`` (id)
-
-:    master ID for vrf slave device
-
 ``table`` (scalar)
 
 :    The numeric routing table identifier. This setting is compulsory.

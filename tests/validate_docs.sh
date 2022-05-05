@@ -26,8 +26,8 @@ for term in $(sed -n 's/[ ]\+{"\([a-z0-9-]\+\)", YAML_[A-Z]\+_NODE.*/\1/p' src/p
         continue
     fi
 
-    # 3. we give a pass to network and version
-    if [[ $term = "network" ]] || [[ $term = "version" ]]; then
+    # 3. we give a pass to network, version and vrf
+    if [[ $term = "network" ]] || [[ $term = "version" || [[ $term = "vrf" ]]; then
         continue
     fi
 
