@@ -817,6 +817,15 @@ _serialize_yaml(
         YAML_BOOL_FALSE(def, event, emitter, "neigh-suppress", def->neigh_suppress);
     }
 
+    /* VXLAN options */
+    if (def->vxlans) {
+        YAML_SCALAR_PLAIN(event, emitter, "vxlans");
+        YAML_SEQUENCE_OPEN(event, emitter);
+        for (unsigned i = 0; i < def->vxlans->len; ++i)
+            YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->vxlans, char*, i));
+        YAML_SEQUENCE_CLOSE(event, emitter);
+    }
+
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF)
         YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
