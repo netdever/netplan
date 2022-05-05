@@ -227,9 +227,9 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
         || def->vxlan_params.group_policy_extension
         || def->vxlan_params.generic_protocol_extension
         || def->vxlan_params.destination_port
-        || def->vxlan_params.source_port_range
         || def->vxlan_params.flow_label
-        || def->vxlan_params.ip_do_not_fragment) {
+        || def->vxlan_params.ip_do_not_fragment
+        || def->vxlan_params.source_port_range) {
         YAML_SCALAR_PLAIN(event, emitter, "parameters");
         YAML_MAPPING_OPEN(event, emitter);
         YAML_STRING(def, event, emitter, "remote", def->vxlan_params.remote);
@@ -252,13 +252,17 @@ write_vxlan_params(yaml_event_t* event, yaml_emitter_t* emitter, const NetplanNe
         YAML_BOOL_FALSE(def, event, emitter, "group-policy-extension", def->vxlan_params.group_policy_extension);
         YAML_BOOL_FALSE(def, event, emitter, "generic-protocol-extension", def->vxlan_params.generic_protocol_extension);
         YAML_UINT_0(def, event, emitter, "destination-port", def->vxlan_params.destination_port);
-        YAML_SCALAR_PLAIN(event, emitter, "source-port-range");
-        YAML_SEQUENCE_OPEN(event, emitter);
-        for (unsigned i = 0; i < def->vxlan_params.source_port_range->len; ++i)
-            YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->vxlan_params.source_port_range, char*, i));
-        YAML_SEQUENCE_CLOSE(event, emitter);
         YAML_UINT_0(def, event, emitter, "flow-label", def->vxlan_params.flow_label);
         YAML_BOOL_FALSE(def, event, emitter, "ip-do-not-fragment", def->vxlan_params.ip_do_not_fragment);
+        if (def->vxlan_params.source_port_range || DIRTY(def, def->vxlan_params.source_port_range)) {
+            GArray* arr = def->vxlan_params.source_port_range;
+            YAML_SCALAR_PLAIN(event, emitter, "source-port-range");
+            YAML_SEQUENCE_OPEN(event, emitter);
+            if (arr)
+                for (unsigned i = 0; i < arr->len; ++i)
+                    YAML_SCALAR_PLAIN(event, emitter, g_array_index(arr, char*, i));
+            YAML_SEQUENCE_CLOSE(event, emitter);
+        }
         YAML_MAPPING_CLOSE(event, emitter);
     }
     return TRUE;

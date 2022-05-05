@@ -41,7 +41,7 @@ for term in $(sed -n 's/[ ]\+{"\([a-z0-9-]\+\)", YAML_[A-Z]\+_NODE.*/\1/p' src/p
         continue
     fi
 
-    # 6. give a pass to vrf since it is a virtual device
+    # 6. give a pass to vrf (master id of a slave device)
     if [[ $term = "vrf" ]]; then
         continue
     fi
