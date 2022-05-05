@@ -1478,10 +1478,6 @@ Example:
 
 ## Properties for device type ``vrfs:``
 
-``vrf`` (scalar)
-
-:    The name of the VRF. This setting is compulsory.
-
 ``table`` (scalar)
 
 :    The numeric routing table identifier. This setting is compulsory.
