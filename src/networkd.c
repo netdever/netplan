@@ -895,9 +895,10 @@ netplan_netdef_write_network_file(
     }
 
     /* VXLAN options */
-    if (def->vxlans)
+    if (def->vxlans) {
         for (unsigned i = 0; i < def->vxlans->len; ++i)
             g_string_append_printf(network, "VXLAN=%s\n", g_array_index(def->vxlans, char*, i));
+    }
 
     if (def->neigh_suppress) {
         g_string_append_printf(network, "\n[Bridge]\n");
