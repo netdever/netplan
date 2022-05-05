@@ -430,7 +430,9 @@ write_vxlan_parameters(const NetplanNetDefinition* def, GString* s)
         g_string_append_printf(params, "\nGenericProtocolExtension=%s", def->vxlan_params.generic_protocol_extension ? "True" : "False");
     if (def->vxlan_params.destination_port)
         g_string_append_printf(params, "\nDestinationPort=%d", def->vxlan_params.destination_port);
-    if (def->vxlan_params.source_port_range) {
+    if (def->vxlan_params.source_port_range && def->vxlan_params.source_port_range->len > 0) {
+        g_set_error(error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT, "ERROR: %s: ", def->vxlan_params.source_port_range);
+        return FALSE;
         g_string_append_printf(params, "\nPortRange=");
         for (unsigned i = 0; i < def->vxlan_params.source_port_range->len; ++i) {
             if (i > 0)
