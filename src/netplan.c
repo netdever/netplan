@@ -824,6 +824,11 @@ _serialize_yaml(
     /* VRF settings */
     if (def->type == NETPLAN_DEF_TYPE_VRF) {
         YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
+        YAML_SCALAR_PLAIN(event, emitter, "interfaces");
+        YAML_SEQUENCE_OPEN(event, emitter);
+        for (unsigned i = 0; i < def->interfaces->len; ++i)
+            YAML_SCALAR_PLAIN(event, emitter, g_array_index(def->interfaces, char*, i));
+        YAML_SEQUENCE_CLOSE(event, emitter);
     }
 
     /* Tunnel settings */
