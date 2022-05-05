@@ -336,12 +336,16 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
             return yaml_error(npp, node, error, "%s: invalid ttl '%u' (allowed values are 0 to 255)", nd->id, nd->vxlan_params.ttl);
         if (nd->vxlan_params.flow_label > 1048575)
             return yaml_error(npp, node, error, "%s: invalid flow-label '%u' (allowed values are 0 to 1048575)", nd->id, nd->vxlan_params.flow_label);
-        if (nd->vxlan_params.source_port_range->len != 2) {
-            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (allowed values are 0 to 1048575)", nd->id, vxlan_params.source_port_range);
-        } elif (nd->vxlan_params.source_port_range[0] > nd->vxlan_params.source_port_range[1]) {
-            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (UPPER must be greater than or equal to LOWER)", nd->id, vxlan_params.source_port_range);
-        } elif (nd->vxlan_params.source_port_range[0] < 0 || nd->vxlan_params.source_port_range[1] > 65535) {
-            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (allowed values are 0 to 65535)", nd->id, vxlan_params.source_port_range);
+        if (nd->vxlan_params.source_port_range->len != 2)
+            return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (must be [LOWER, UPPER])", nd->id, vxlan_params.source_port_range);
+        for (guint i = 0; i < nd->vxlan_params.source_port_range->len; i++) {
+            guint lower = g_array_index (nd->vxlan_params.source_port_range, char*, i);
+            guint upper = g_array_index (nd->vxlan_params.source_port_range, char*, i++);
+            if (lower > upper)
+                return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (UPPER must be greater than or equal to LOWER)", nd->id, vxlan_params.source_port_range);
+            elif (lower < 0 || upper > 65535) {
+                return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (allowed values are 0 to 65535)", nd->id, vxlan_params.source_port_range);
+            break;
         }
     }
 
