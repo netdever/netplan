@@ -259,10 +259,8 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     netdef->has_vlans = FALSE;
 
     netdef->vxlan_vni = G_MAXUINT;
-    netdef->vxlan_link = NULL;
 
     netdef->vrf_table = G_MAXUINT;
-    netdef->vrf_link = NULL;
 
     FREE_AND_NULLIFY(netdef->set_mac);
     netdef->mtubytes = 0;
@@ -323,7 +321,6 @@ reset_netdef(NetplanNetDefinition* netdef, NetplanDefType new_type, NetplanBacke
     free_garray_with_destructor(&netdef->vxlan_params.source_port_range, g_free);
     netdef->vxlan_params.flow_label = 0;
     netdef->vxlan_params.ip_do_not_fragment = FALSE;
-    netdef->vrf = NULL;
     netdef->neigh_suppress = FALSE;
     free_garray_with_destructor(&netdef->vxlans, g_free);
     memset(&netdef->vxlan_params, 0, sizeof(netdef->vxlan_params));
