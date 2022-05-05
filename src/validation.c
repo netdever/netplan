@@ -343,7 +343,7 @@ validate_netdef_grammar(const NetplanParser* npp, NetplanNetDefinition* nd, yaml
             int upper = (intptr_t)g_array_index (nd->vxlan_params.source_port_range, char*, i++);
             if (lower > upper)
                 return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (UPPER must be greater than or equal to LOWER)", nd->id, nd->vxlan_params.source_port_range);
-            elif (lower < 0 || upper > 65535) {
+            elif (lower < 0 || upper > 65535)
                 return yaml_error(npp, node, error, "%s: invalid source-port-range '%u' (allowed values are 0 to 65535)", nd->id, nd->vxlan_params.source_port_range);
             break;
         }
