@@ -520,10 +520,6 @@ similar to ``gateway*``, and ``search:`` is a list of search domains.
 
 :   Configure policy routing for the device; see the ``Routing`` section below.
 
-``vrf`` (scalar)
-
-:   VRF interface to add the link to.
-
 ``vxlans`` (sequence of scalars)
 
 :   The VXLAN interfaces be created on the link.
@@ -1485,6 +1481,23 @@ Example:
 ``table`` (scalar)
 
 :    The numeric routing table identifier. This setting is compulsory.
+
+``interfaces`` (sequence of scalars)
+
+:    All devices matching this ID list will be added to the vrf. This may
+     be an empty list, in which case the vrf will be brought online with
+     no member interfaces.
+
+     Example:
+
+          vrfs:
+            vrf20:
+              table: 20
+              interfaces: [ br0 ]
+          [...]
+          bridges:
+            br0:
+              interfaces: []
 
 ## Properties for device type ``nm-devices:``
 

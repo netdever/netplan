@@ -826,9 +826,6 @@ _serialize_yaml(
         YAML_UINT_DEFAULT(def, event, emitter, "table", def->vrf_table, G_MAXUINT);
     }
 
-    /* Interface VRF linkage */
-    YAML_STRING(def, event, emitter, "vrf", def->vrf);
-
     /* Tunnel settings */
     if (def->type == NETPLAN_DEF_TYPE_TUNNEL) {
         write_tunnel_settings(event, emitter, def);
