@@ -330,6 +330,7 @@ struct netplan_net_definition {
 
     /* vrf */
     /* netplan-feature: vrf */
+    char* vrf;
     guint vrf_table;
 
     /* vxlan */
