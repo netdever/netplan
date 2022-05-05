@@ -606,13 +606,13 @@
       <data-member access='public' layout-offset-in-bits='9088'>
         <var-decl name='vxlan_link' type-id='type-id-71' visibility='default' filepath='src/abi.h' line='340' column='1'/>
       </data-member>
-      <data-member access='public' layout-offset-in-bits='9216'>
+      <data-member access='public' layout-offset-in-bits='9152'>
         <var-decl name='vxlans' type-id='type-id-60' visibility='default' filepath='src/abi.h' line='341' column='1'/>
       </data-member>
-      <data-member access='public' layout-offset-in-bits='9280'>
+      <data-member access='public' layout-offset-in-bits='9216'>
         <var-decl name='neigh_suppress' type-id='type-id-39' visibility='default' filepath='src/abi.h' line='342' column='1'/>
       </data-member>
-      <data-member access='public' layout-offset-in-bits='9344'>
+      <data-member access='public' layout-offset-in-bits='9280'>
         <var-decl name='vxlan_params' type-id='type-id-180' visibility='default' filepath='src/abi.h' line='369' column='1'/>
       </data-member>
     </class-decl>
