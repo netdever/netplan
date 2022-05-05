@@ -55,11 +55,13 @@ UseMTU=true
   vrfs:
     vrf1005:
       table: 1005
-      interfaces:
-      - br0
+      interfaces: [ br0 ]
+  ethernets:
+    eno1:
+      addresses: [ 192.168.0.10/24 ]
   bridges:
     br0:
-      interfaces: []''')
+      interfaces: [ eno1 ]''')
 
         self.assert_networkd({'br0.network': '''[Match]
 Name=br0
